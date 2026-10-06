@@ -1,0 +1,31 @@
+# ROS 2 build files
+build/
+install/
+log/
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary / backup files
+*.bak
+*.before_e2e
+*~
+
+# Generated experiment outputs
+saved_detected_person/
+
+# Local archives
+*.zip
+
+# Experiment logs/data
+*_timing_log.csv

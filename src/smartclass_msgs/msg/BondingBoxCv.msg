@@ -1,0 +1,11 @@
+string camera_id
+std_msgs/Int64 frame_sequence 
+std_msgs/Int64 frame_sampling
+string frame_id
+std_msgs/Int8  bondingbox_id 
+sensor_msgs/Image cropped_image 
+vision_msgs/BoundingBox2D bondingbox 
+string label  
+float64 confident_level
+string name
+string timestamp
