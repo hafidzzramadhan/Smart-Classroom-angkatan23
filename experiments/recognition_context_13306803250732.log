@@ -1,0 +1,67 @@
+2026-10-11T19:54:33+07:00
+/face_node
+/frame_node
+/recognition_node
+2082 /usr/bin/python3 /opt/ros/jazzy/bin/ros2 run smartclass_cv frame
+2085 /usr/bin/python3 /home/hafidz/smartclass_ws/install/smartclass_cv/lib/smartclass_cv/frame
+2996 /usr/bin/python3 /opt/ros/jazzy/bin/ros2 run smartclass_cv face
+2999 /home/hafidz/smartclass_ws/.venv/bin/python3 /home/hafidz/smartclass_ws/install/smartclass_cv/lib/smartclass_cv/face
+3685 /usr/bin/python3 /opt/ros/jazzy/bin/ros2 run smartclass_cv recognition_debug --seconds 180 --db-path /home/hafidz/smartclass_ws/experiments/recognition_pilot_12356524649516.db --output experiments/recognition_pc_hikvision_13253283618281.csv
+3689 /home/hafidz/smartclass_ws/.venv/bin/python3 /home/hafidz/smartclass_ws/install/smartclass_cv/lib/smartclass_cv/recognition_debug --seconds 180 --db-path /home/hafidz/smartclass_ws/experiments/recognition_pilot_12356524649516.db --output experiments/recognition_pc_hikvision_13253283618281.csv
+Type: smartclass_msgs/msg/BondingBoxCv
+
+Publisher count: 1
+
+Node name: face_node
+Node namespace: /
+Topic type: smartclass_msgs/msg/BondingBoxCv
+Topic type hash: RIHS01_27f10534b006ecc04ab16b97d971a43f398b27a7ac2791f4935a19396120e3ff
+Endpoint type: PUBLISHER
+GID: 01.0f.89.d2.b7.0b.74.50.00.00.00.00.00.00.14.03
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: recognition_node
+Node namespace: /
+Topic type: smartclass_msgs/msg/BondingBoxCv
+Topic type hash: RIHS01_27f10534b006ecc04ab16b97d971a43f398b27a7ac2791f4935a19396120e3ff
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.89.d2.69.0e.d4.5a.00.00.00.00.00.00.13.04
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Type: smartclass_msgs/msg/BondingBoxCv
+
+Publisher count: 1
+
+Node name: recognition_node
+Node namespace: /
+Topic type: smartclass_msgs/msg/BondingBoxCv
+Topic type hash: RIHS01_27f10534b006ecc04ab16b97d971a43f398b27a7ac2791f4935a19396120e3ff
+Endpoint type: PUBLISHER
+GID: 01.0f.89.d2.69.0e.d4.5a.00.00.00.00.00.00.14.03
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 0
+

@@ -1,0 +1,1268 @@
+Original face source: /home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/face_node.py
+Original SHA256: 190f71d4b08617cbc23d24c7a8811ce56725db91f552d2f261882cf2a9ff6cb7
+CSV: /home/hafidz/smartclass_ws/experiments/face_pc_hikvision_13714347236728.csv
+[INFO] [1791651950.291443085] [face_node]: ✅ NODE READY - Face Detection
+Node initialization including model loading: 704.71 ms
+Model: /home/hafidz/smartclass_ws/install/smartclass_cv/share/smartclass_cv/models/face.pt
+Recording for about 180 seconds.
+
+[W1011 00:05:54.199150536 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:54.217764839 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 876.3ms
+Speed: 4.1ms preprocess, 876.3ms inference, 7.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:54.870081118 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:54.870786953 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 636.8ms
+Speed: 1.4ms preprocess, 636.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:55.505830343 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:55.507836710 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 620.4ms
+Speed: 2.5ms preprocess, 620.4ms inference, 4.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:56.170998524 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:56.171932715 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 637.6ms
+Speed: 5.8ms preprocess, 637.6ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:56.778430905 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:56.779203909 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 602.4ms
+Speed: 4.3ms preprocess, 602.4ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:57.371377158 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:57.372377394 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 584.4ms
+Speed: 1.5ms preprocess, 584.4ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:57.992721269 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:57.993753967 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 613.6ms
+Speed: 1.4ms preprocess, 613.6ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:58.602362365 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:58.603745035 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 601.3ms
+Speed: 1.5ms preprocess, 601.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:59.244471588 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:59.245493342 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 638.8ms
+Speed: 3.0ms preprocess, 638.8ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:05:59.904883593 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:05:59.906313037 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 646.0ms
+Speed: 3.4ms preprocess, 646.0ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651959.939582090] [face_node]: [Callback #10] seq=350780 boxes=1 published=1 total=655.46 ms status=ok
+
+[W1011 00:06:00.941212622 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:00.942069259 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1038.0ms
+Speed: 1.8ms preprocess, 1038.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:01.582838659 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:01.583589117 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 624.1ms
+Speed: 1.5ms preprocess, 624.1ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:02.269280040 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:02.270163191 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 684.4ms
+Speed: 1.4ms preprocess, 684.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:02.993693255 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:02.994443406 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 730.7ms
+Speed: 2.1ms preprocess, 730.7ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:03.742108195 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:03.745437076 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 752.0ms
+Speed: 1.7ms preprocess, 752.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:04.468597190 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:04.469707798 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 690.8ms
+Speed: 1.6ms preprocess, 690.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:05.140192104 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:05.141893853 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 684.2ms
+Speed: 1.6ms preprocess, 684.2ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:05.858044291 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:05.858884818 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 703.4ms
+Speed: 1.7ms preprocess, 703.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:06.565704495 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:06.566573311 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 687.9ms
+Speed: 1.6ms preprocess, 687.9ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:07.238258315 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:07.239884593 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 660.3ms
+Speed: 1.5ms preprocess, 660.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651967.273318703] [face_node]: [Callback #20] seq=351000 boxes=1 published=1 total=665.13 ms status=ok
+
+[W1011 00:06:08.059294064 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:08.060082853 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 831.1ms
+Speed: 3.8ms preprocess, 831.1ms inference, 3.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:08.974214987 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:08.975374960 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 887.8ms
+Speed: 2.9ms preprocess, 887.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:10.111910968 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:10.112825067 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1102.6ms
+Speed: 8.3ms preprocess, 1102.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:10.777694041 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:10.778422584 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 662.0ms
+Speed: 1.5ms preprocess, 662.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:11.472273511 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:11.473157987 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 683.7ms
+Speed: 5.5ms preprocess, 683.7ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:12.242887036 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:12.244525996 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 763.7ms
+Speed: 2.8ms preprocess, 763.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:14.937758396 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:14.938527176 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 687.0ms
+Speed: 1.8ms preprocess, 687.0ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:15.609444314 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:15.610307487 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 660.4ms
+Speed: 3.2ms preprocess, 660.4ms inference, 2.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:16.272408175 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:16.273450194 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 653.9ms
+Speed: 2.1ms preprocess, 653.9ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:16.930775641 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:16.931523686 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 661.8ms
+Speed: 1.5ms preprocess, 661.8ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651976.778698618] [face_node]: [Callback #30] seq=351232 boxes=1 published=1 total=668.04 ms status=ok
+
+[W1011 00:06:17.605173875 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:17.605866156 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 651.6ms
+Speed: 5.4ms preprocess, 651.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:17.243008474 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:17.244943489 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 630.8ms
+Speed: 1.4ms preprocess, 630.8ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:18.917749724 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:18.919281793 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 670.5ms
+Speed: 2.4ms preprocess, 670.5ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:19.618593426 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:19.619692062 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 688.5ms
+Speed: 5.9ms preprocess, 688.5ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:20.351767870 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:20.352777898 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 729.1ms
+Speed: 1.5ms preprocess, 729.1ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:20.013613800 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:20.016048664 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 654.2ms
+Speed: 2.1ms preprocess, 654.2ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:21.849302208 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:21.850299315 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 853.4ms
+Speed: 1.5ms preprocess, 853.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:22.708494995 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:22.711250966 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 868.9ms
+Speed: 2.0ms preprocess, 868.9ms inference, 2.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:23.669882478 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:23.674281791 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 923.1ms
+Speed: 11.4ms preprocess, 923.1ms inference, 3.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:24.835685484 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:24.838141213 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1147.5ms
+Speed: 3.7ms preprocess, 1147.5ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651984.697611353] [face_node]: [Callback #40] seq=351455 boxes=1 published=1 total=1155.70 ms status=ok
+
+[W1011 00:06:25.783446536 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:25.785554933 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 919.4ms
+Speed: 1.9ms preprocess, 919.4ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:26.502083271 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:26.502915661 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 706.9ms
+Speed: 1.4ms preprocess, 706.9ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:26.156221480 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:26.158507131 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 650.3ms
+Speed: 2.4ms preprocess, 650.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:27.846927245 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:27.847710441 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 670.7ms
+Speed: 3.4ms preprocess, 670.7ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:28.681798519 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:28.682452402 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 823.5ms
+Speed: 1.4ms preprocess, 823.5ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:29.376236331 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:29.377071292 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 687.3ms
+Speed: 2.1ms preprocess, 687.3ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:29.967439967 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:29.968410643 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 583.7ms
+Speed: 1.7ms preprocess, 583.7ms inference, 1.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:30.678518260 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:30.681657946 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 704.1ms
+Speed: 6.8ms preprocess, 704.1ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:31.282370428 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:31.283422009 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 593.8ms
+Speed: 3.1ms preprocess, 593.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:31.884946631 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:31.885890931 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 596.7ms
+Speed: 1.4ms preprocess, 596.7ms inference, 2.5ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651991.720686760] [face_node]: [Callback #50] seq=351682 boxes=1 published=1 total=604.34 ms status=ok
+
+[W1011 00:06:32.501971204 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:32.502659787 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 599.7ms
+Speed: 1.4ms preprocess, 599.7ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:32.161408652 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:32.164697989 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 671.2ms
+Speed: 2.0ms preprocess, 671.2ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:33.773331610 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:33.775408023 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 608.7ms
+Speed: 2.9ms preprocess, 608.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:34.546135286 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:34.546957994 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 758.5ms
+Speed: 2.8ms preprocess, 758.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:34.165983312 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:34.166689760 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 596.1ms
+Speed: 1.5ms preprocess, 596.1ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:35.773489404 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:35.774232330 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 605.3ms
+Speed: 1.4ms preprocess, 605.3ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:36.409353242 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:36.410134120 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 633.3ms
+Speed: 1.6ms preprocess, 633.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:36.058693804 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:36.059422789 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 635.9ms
+Speed: 1.4ms preprocess, 635.9ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:37.686440627 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:37.687262869 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 622.2ms
+Speed: 3.2ms preprocess, 622.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:38.415536946 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:38.418089245 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 745.5ms
+Speed: 1.4ms preprocess, 745.5ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791651998.273498583] [face_node]: [Callback #60] seq=351874 boxes=1 published=1 total=752.00 ms status=ok
+
+[W1011 00:06:38.142605315 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:38.150629929 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 898.7ms
+Speed: 1.5ms preprocess, 898.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:39.252448585 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:39.253175387 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 897.3ms
+Speed: 1.9ms preprocess, 897.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:40.954816682 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:40.960164337 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 725.2ms
+Speed: 1.6ms preprocess, 725.2ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:41.677571862 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:41.678366212 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 705.0ms
+Speed: 1.4ms preprocess, 705.0ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:42.383392199 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:42.385513217 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 685.3ms
+Speed: 1.4ms preprocess, 685.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:42.168608543 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:42.169356881 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 772.2ms
+Speed: 2.1ms preprocess, 772.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:43.884044755 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:43.885365636 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 700.9ms
+Speed: 7.8ms preprocess, 700.9ms inference, 2.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:44.582741924 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:44.583815541 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 699.7ms
+Speed: 1.5ms preprocess, 699.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:45.275239013 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:45.276668513 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 670.1ms
+Speed: 3.5ms preprocess, 670.1ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:45.947938571 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:45.948690765 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 665.3ms
+Speed: 1.6ms preprocess, 665.3ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652005.776235142] [face_node]: [Callback #70] seq=352102 boxes=1 published=1 total=670.26 ms status=ok
+
+[W1011 00:06:46.609965204 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:46.611070727 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 675.0ms
+Speed: 1.5ms preprocess, 675.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:49.582386081 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:49.583068026 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 946.0ms
+Speed: 5.3ms preprocess, 946.0ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:49.228169480 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:49.228904349 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 655.6ms
+Speed: 2.4ms preprocess, 655.6ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:50.906853079 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:50.907744446 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 674.4ms
+Speed: 1.5ms preprocess, 674.4ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:51.615515863 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:51.617503190 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 678.3ms
+Speed: 2.3ms preprocess, 678.3ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:51.280226822 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:51.281861011 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 680.5ms
+Speed: 1.4ms preprocess, 680.5ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:52.980123913 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:52.981926908 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 669.1ms
+Speed: 3.1ms preprocess, 669.1ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:53.626644738 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:53.627519632 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 638.5ms
+Speed: 1.4ms preprocess, 638.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:53.280469092 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:53.281152931 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 645.6ms
+Speed: 9.1ms preprocess, 645.6ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:54.948658437 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:54.949965623 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 663.9ms
+Speed: 2.2ms preprocess, 663.9ms inference, 1.9ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652014.593947029] [face_node]: [Callback #80] seq=352312 boxes=1 published=1 total=670.39 ms status=ok
+
+[W1011 00:06:55.633490111 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:55.634375664 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 669.5ms
+Speed: 12.9ms preprocess, 669.5ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:55.365027157 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:55.366074302 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 730.6ms
+Speed: 2.9ms preprocess, 730.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:56.091046908 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:56.091895340 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 702.4ms
+Speed: 12.2ms preprocess, 702.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:57.759023987 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:57.760115908 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 664.2ms
+Speed: 2.3ms preprocess, 664.2ms inference, 2.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:58.574713842 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:58.578532264 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 809.2ms
+Speed: 1.4ms preprocess, 809.2ms inference, 2.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:06:59.484680858 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:06:59.490565252 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 919.6ms
+Speed: 2.1ms preprocess, 919.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:00.622362380 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:00.625163410 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1100.2ms
+Speed: 6.2ms preprocess, 1100.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:00.315117822 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:00.316046715 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 675.8ms
+Speed: 1.6ms preprocess, 675.8ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:01.013895333 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:01.014575379 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 684.8ms
+Speed: 4.8ms preprocess, 684.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:02.687903821 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:02.688965420 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 668.3ms
+Speed: 1.4ms preprocess, 668.3ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652022.331162501] [face_node]: [Callback #90] seq=352544 boxes=1 published=1 total=673.90 ms status=ok
+
+[W1011 00:07:02.420817139 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:02.428730162 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 746.9ms
+Speed: 1.4ms preprocess, 746.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:03.265019395 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:03.267086843 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 820.4ms
+Speed: 1.9ms preprocess, 820.4ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:04.140568425 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:04.147341461 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 892.4ms
+Speed: 1.5ms preprocess, 892.4ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:05.027331358 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:05.028850935 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 866.1ms
+Speed: 3.2ms preprocess, 866.1ms inference, 4.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:06.903156709 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:06.908522137 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 876.2ms
+Speed: 12.1ms preprocess, 876.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:07.703823589 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:07.706245464 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 762.8ms
+Speed: 2.0ms preprocess, 762.8ms inference, 2.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:08.479656782 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:08.481279254 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 763.8ms
+Speed: 2.1ms preprocess, 763.8ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:08.191261137 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:08.192591012 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 694.0ms
+Speed: 2.9ms preprocess, 694.0ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:09.838651996 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:09.840114512 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 661.4ms
+Speed: 1.7ms preprocess, 661.4ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:10.511304436 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:10.512400893 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 650.0ms
+Speed: 1.6ms preprocess, 650.0ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652030.157623391] [face_node]: [Callback #100] seq=352779 boxes=1 published=1 total=656.33 ms status=ok
+
+[W1011 00:07:10.176746212 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:10.177457970 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 666.9ms
+Speed: 1.9ms preprocess, 666.9ms inference, 3.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:11.038378807 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:11.042663387 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 843.8ms
+Speed: 4.5ms preprocess, 843.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:12.657961285 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:12.659249712 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 615.6ms
+Speed: 1.6ms preprocess, 615.6ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:12.395412931 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:12.397152321 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 736.5ms
+Speed: 3.2ms preprocess, 736.5ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:13.062759333 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:13.063560203 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 628.4ms
+Speed: 2.0ms preprocess, 628.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:14.656963384 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:14.657947597 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 587.4ms
+Speed: 1.6ms preprocess, 587.4ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:14.279997624 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:14.280874619 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 617.3ms
+Speed: 1.4ms preprocess, 617.3ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:15.887536145 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:15.889600509 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 606.1ms
+Speed: 1.4ms preprocess, 606.1ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:16.494606259 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:16.495438792 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 592.7ms
+Speed: 1.5ms preprocess, 592.7ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:16.099930727 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:16.100766199 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 598.9ms
+Speed: 1.5ms preprocess, 598.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652036.732481976] [face_node]: [Callback #110] seq=352978 boxes=1 published=1 total=604.12 ms status=ok
+
+[W1011 00:07:17.692227782 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:17.693152650 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 585.6ms
+Speed: 3.4ms preprocess, 585.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:17.295419819 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:17.297321885 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 595.3ms
+Speed: 1.5ms preprocess, 595.3ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:18.894422937 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:18.895243162 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 589.4ms
+Speed: 2.7ms preprocess, 589.4ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:19.507290700 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:19.508508969 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 614.5ms
+Speed: 1.4ms preprocess, 614.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:19.112784767 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:19.113753418 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 594.0ms
+Speed: 1.8ms preprocess, 594.0ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:20.724891657 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:20.725712260 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 602.9ms
+Speed: 2.5ms preprocess, 602.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:22.333544135 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:22.334230984 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 602.5ms
+Speed: 1.5ms preprocess, 602.5ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:23.945137401 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:23.946000886 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 601.3ms
+Speed: 1.4ms preprocess, 601.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:23.550672929 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:23.551569923 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 600.8ms
+Speed: 5.3ms preprocess, 600.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:24.158069654 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:24.159306949 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 610.8ms
+Speed: 1.4ms preprocess, 610.8ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652044.623127905] [face_node]: [Callback #120] seq=353161 boxes=1 published=1 total=617.01 ms status=ok
+
+[W1011 00:07:25.092851592 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:25.093822799 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 916.9ms
+Speed: 1.8ms preprocess, 916.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:26.755888546 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:26.758744330 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 692.9ms
+Speed: 1.9ms preprocess, 692.9ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:26.495943171 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:26.497502593 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 696.6ms
+Speed: 4.5ms preprocess, 696.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:27.452594971 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:27.453481297 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 980.5ms
+Speed: 1.5ms preprocess, 980.5ms inference, 2.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:28.151017197 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:28.154488267 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 677.9ms
+Speed: 1.5ms preprocess, 677.9ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:29.848657274 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:29.849519398 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 660.4ms
+Speed: 1.8ms preprocess, 660.4ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:29.454724004 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:29.455601912 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 605.7ms
+Speed: 1.8ms preprocess, 605.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:30.076618715 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:30.078143502 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 612.5ms
+Speed: 2.3ms preprocess, 612.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:31.702859534 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:31.706023236 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 612.8ms
+Speed: 2.5ms preprocess, 612.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:31.310849683 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:31.311863529 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 598.1ms
+Speed: 1.7ms preprocess, 598.1ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652051.759944727] [face_node]: [Callback #130] seq=353375 boxes=1 published=1 total=603.54 ms status=ok
+
+[W1011 00:07:32.921885006 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:32.922717474 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 604.3ms
+Speed: 1.5ms preprocess, 604.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:32.549122835 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:32.550035660 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 623.9ms
+Speed: 5.0ms preprocess, 623.9ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:33.164336759 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:33.165067727 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 610.7ms
+Speed: 1.7ms preprocess, 610.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:34.781780131 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:34.782468529 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 602.0ms
+Speed: 1.4ms preprocess, 602.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:34.533392846 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:34.540984066 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 757.1ms
+Speed: 6.9ms preprocess, 757.1ms inference, 2.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:35.257700490 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:35.258385635 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 701.7ms
+Speed: 4.4ms preprocess, 701.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:36.961611353 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:36.962373631 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 684.7ms
+Speed: 3.4ms preprocess, 684.7ms inference, 2.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:37.919463568 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:37.920527894 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 951.3ms
+Speed: 1.7ms preprocess, 951.3ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:37.582711291 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:37.585867412 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 655.9ms
+Speed: 4.7ms preprocess, 655.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:38.275603826 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:38.276547669 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 685.4ms
+Speed: 2.2ms preprocess, 685.4ms inference, 3.2ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652058.731470690] [face_node]: [Callback #140] seq=353582 boxes=1 published=1 total=693.61 ms status=ok
+
+[W1011 00:07:39.963619994 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:39.964551676 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 694.3ms
+Speed: 8.0ms preprocess, 694.3ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:39.613523702 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:39.614394675 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 616.7ms
+Speed: 1.6ms preprocess, 616.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:40.202137007 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:40.202865796 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 583.6ms
+Speed: 1.8ms preprocess, 583.6ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:41.803614548 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:41.804497495 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 591.6ms
+Speed: 3.0ms preprocess, 591.6ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:41.401351420 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:41.402157101 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 593.6ms
+Speed: 1.5ms preprocess, 593.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:42.002488560 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:42.003273007 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 591.4ms
+Speed: 1.4ms preprocess, 591.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:42.613218850 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:42.614013587 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 610.6ms
+Speed: 1.4ms preprocess, 610.6ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:43.229890114 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:43.233236875 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 607.5ms
+Speed: 1.8ms preprocess, 607.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:44.922261626 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:44.923189828 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 680.7ms
+Speed: 1.5ms preprocess, 680.7ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:45.805563526 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:45.808279157 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 876.4ms
+Speed: 1.4ms preprocess, 876.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652065.258036985] [face_node]: [Callback #150] seq=353772 boxes=1 published=1 total=881.33 ms status=ok
+
+[W1011 00:07:45.413535115 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:45.414310685 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 599.2ms
+Speed: 1.5ms preprocess, 599.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:46.029028860 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:46.029801304 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 609.5ms
+Speed: 1.6ms preprocess, 609.5ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:47.805652489 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:47.807629879 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 950.3ms
+Speed: 1.7ms preprocess, 950.3ms inference, 4.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:48.704608847 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:48.705397207 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 699.9ms
+Speed: 1.5ms preprocess, 699.9ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:48.416265193 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:48.417183731 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 734.1ms
+Speed: 1.7ms preprocess, 734.1ms inference, 2.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:49.111442908 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:49.114250725 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 661.8ms
+Speed: 1.9ms preprocess, 661.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:50.738617572 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:50.740455689 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 615.7ms
+Speed: 1.9ms preprocess, 615.7ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:50.406401358 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:50.407223163 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 663.5ms
+Speed: 1.4ms preprocess, 663.5ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:51.119283969 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:51.121116591 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 709.8ms
+Speed: 1.4ms preprocess, 709.8ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:52.804390358 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:52.805265919 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 671.6ms
+Speed: 1.8ms preprocess, 671.6ms inference, 2.7ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652072.261509746] [face_node]: [Callback #160] seq=353988 boxes=1 published=1 total=679.91 ms status=ok
+
+[W1011 00:07:52.482223831 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:52.483082069 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 664.6ms
+Speed: 1.4ms preprocess, 664.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:53.176974895 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:53.177784759 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 687.8ms
+Speed: 1.8ms preprocess, 687.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:54.856085880 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:54.857852529 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 684.3ms
+Speed: 13.4ms preprocess, 684.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:56.566328966 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:56.567128890 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 672.4ms
+Speed: 5.6ms preprocess, 672.4ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:57.223827800 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:57.225549199 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 658.3ms
+Speed: 2.4ms preprocess, 658.3ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:58.902954594 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:58.903863857 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 664.2ms
+Speed: 1.8ms preprocess, 664.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:59.834665152 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:59.838279768 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 954.7ms
+Speed: 1.8ms preprocess, 954.7ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:07:59.507066147 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:07:59.511688572 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 639.7ms
+Speed: 2.2ms preprocess, 639.7ms inference, 3.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:00.133076463 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:00.134692215 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 606.4ms
+Speed: 2.2ms preprocess, 606.4ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:00.788736134 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:00.789688469 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 647.7ms
+Speed: 2.0ms preprocess, 647.7ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652081.071751955] [face_node]: [Callback #170] seq=354199 boxes=1 published=1 total=655.86 ms status=ok
+
+[W1011 00:08:01.454263173 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:01.457349367 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 678.9ms
+Speed: 1.4ms preprocess, 678.9ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:02.126752451 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:02.127566631 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 641.1ms
+Speed: 1.6ms preprocess, 641.1ms inference, 2.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:02.751489642 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:02.752415051 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 620.6ms
+Speed: 1.4ms preprocess, 620.6ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:03.360485989 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:03.362372576 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 599.3ms
+Speed: 1.6ms preprocess, 599.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:04.001956571 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:04.003816092 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 632.7ms
+Speed: 3.2ms preprocess, 632.7ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:04.696745179 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:04.700476845 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 720.7ms
+Speed: 2.0ms preprocess, 720.7ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:05.460784126 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:05.461809861 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 740.6ms
+Speed: 4.8ms preprocess, 740.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:06.159803925 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:06.161494642 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 679.0ms
+Speed: 5.4ms preprocess, 679.0ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:07.848938989 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:07.850855702 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 663.6ms
+Speed: 2.9ms preprocess, 663.6ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:07.470296276 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:07.474350822 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 621.4ms
+Speed: 1.5ms preprocess, 621.4ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652087.759229263] [face_node]: [Callback #180] seq=354400 boxes=1 published=1 total=628.12 ms status=ok
+
+[W1011 00:08:08.176126763 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:08.177223462 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 693.8ms
+Speed: 1.7ms preprocess, 693.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:09.862938167 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:09.864901839 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 677.4ms
+Speed: 2.4ms preprocess, 677.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:09.560816177 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:09.561629214 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 866.2ms
+Speed: 1.5ms preprocess, 866.2ms inference, 2.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:10.443931192 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:10.447372758 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 686.4ms
+Speed: 3.8ms preprocess, 686.4ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:11.117073244 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:11.117787411 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 659.8ms
+Speed: 1.4ms preprocess, 659.8ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:11.794563533 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:11.795229715 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 675.1ms
+Speed: 1.4ms preprocess, 675.1ms inference, 2.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:12.487318669 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:12.488489024 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 706.6ms
+Speed: 1.9ms preprocess, 706.6ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:13.165770909 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:13.167282961 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 656.6ms
+Speed: 1.7ms preprocess, 656.6ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:14.850263124 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:14.851408224 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 671.7ms
+Speed: 1.4ms preprocess, 671.7ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:14.516167065 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:14.517028275 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 658.5ms
+Speed: 1.9ms preprocess, 658.5ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652094.798142113] [face_node]: [Callback #190] seq=354610 boxes=1 published=1 total=665.45 ms status=ok
+
+[W1011 00:08:15.154791591 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:15.155701534 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 640.3ms
+Speed: 2.6ms preprocess, 640.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:16.926537377 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:16.929906357 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 779.9ms
+Speed: 1.6ms preprocess, 779.9ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:17.848264103 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:17.849820960 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 905.3ms
+Speed: 5.3ms preprocess, 905.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:17.733291520 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:17.734143192 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 857.8ms
+Speed: 5.5ms preprocess, 857.8ms inference, 1.9ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:18.374733716 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:18.379335854 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 650.5ms
+Speed: 2.0ms preprocess, 650.5ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:19.064026025 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:19.064883380 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 667.9ms
+Speed: 1.8ms preprocess, 667.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:19.760801839 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:19.761612316 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 726.2ms
+Speed: 1.8ms preprocess, 726.2ms inference, 3.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:20.649605141 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:20.650533808 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 866.2ms
+Speed: 2.0ms preprocess, 866.2ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:21.505588318 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:21.509383957 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 948.8ms
+Speed: 9.6ms preprocess, 948.8ms inference, 11.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:22.601255236 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:22.605015172 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 966.6ms
+Speed: 12.6ms preprocess, 966.6ms inference, 3.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652102.926108183] [face_node]: [Callback #200] seq=354844 boxes=1 published=1 total=986.20 ms status=ok
+
+[W1011 00:08:23.594123679 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:23.595113903 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 971.6ms
+Speed: 7.1ms preprocess, 971.6ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:24.504019158 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:24.508274111 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 892.6ms
+Speed: 5.1ms preprocess, 892.6ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:25.353898098 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:25.354929235 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 830.1ms
+Speed: 1.9ms preprocess, 830.1ms inference, 1.9ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:26.188742334 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:26.190352988 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 839.7ms
+Speed: 2.8ms preprocess, 839.7ms inference, 3.0ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:27.056985481 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:27.057708227 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 840.6ms
+Speed: 2.3ms preprocess, 840.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:28.881714089 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:28.882460686 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 818.3ms
+Speed: 3.8ms preprocess, 818.3ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:30.571484331 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:30.573457872 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 672.4ms
+Speed: 2.3ms preprocess, 672.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:31.263460384 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:31.264771377 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 688.2ms
+Speed: 2.5ms preprocess, 688.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:31.919773847 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:31.923871801 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 669.3ms
+Speed: 1.4ms preprocess, 669.3ms inference, 2.9ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:32.786352201 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:32.790730129 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 863.4ms
+Speed: 2.5ms preprocess, 863.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652112.943298190] [face_node]: [Callback #210] seq=355094 boxes=1 published=1 total=871.17 ms status=ok
+
+[W1011 00:08:33.444113237 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:33.445003985 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 609.8ms
+Speed: 1.5ms preprocess, 609.8ms inference, 2.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:34.088692219 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:34.091487225 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 662.9ms
+Speed: 1.5ms preprocess, 662.9ms inference, 1.8ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:34.758110313 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:34.759797538 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 648.8ms
+Speed: 6.8ms preprocess, 648.8ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:35.560039929 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:35.560767474 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 792.8ms
+Speed: 8.8ms preprocess, 792.8ms inference, 2.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:36.228202830 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:36.229081278 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 632.2ms
+Speed: 3.2ms preprocess, 632.2ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:36.861964717 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:36.862759012 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 628.4ms
+Speed: 1.4ms preprocess, 628.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:37.831103446 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:37.834923826 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1029.4ms
+Speed: 1.7ms preprocess, 1029.4ms inference, 1.9ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:38.630334826 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:38.631079203 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 725.8ms
+Speed: 3.2ms preprocess, 725.8ms inference, 4.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:39.260919439 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:39.262898769 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 621.3ms
+Speed: 1.5ms preprocess, 621.3ms inference, 1.2ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:40.260208471 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:40.260968531 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1020.9ms
+Speed: 1.5ms preprocess, 1020.9ms inference, 2.1ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652120.409800033] [face_node]: [Callback #220] seq=355313 boxes=1 published=1 total=1026.77 ms status=ok
+
+[W1011 00:08:41.180867107 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:41.186887242 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1000.2ms
+Speed: 2.0ms preprocess, 1000.2ms inference, 5.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:42.000408946 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:42.001119183 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 673.0ms
+Speed: 12.9ms preprocess, 673.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:42.704281639 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:42.708590970 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 699.9ms
+Speed: 1.4ms preprocess, 699.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:43.354879496 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:43.356236663 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 656.2ms
+Speed: 2.7ms preprocess, 656.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:44.064771757 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:44.065566209 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 682.2ms
+Speed: 8.1ms preprocess, 682.2ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:45.159658382 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:45.160466583 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1071.4ms
+Speed: 1.9ms preprocess, 1071.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:45.750274057 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:45.751329179 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 586.8ms
+Speed: 2.8ms preprocess, 586.8ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:46.365299143 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:46.366135122 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 604.7ms
+Speed: 3.3ms preprocess, 604.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:46.961484021 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:46.963302729 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 591.3ms
+Speed: 1.5ms preprocess, 591.3ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:47.681331980 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:47.683690549 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 741.0ms
+Speed: 1.5ms preprocess, 741.0ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652127.824211273] [face_node]: [Callback #230] seq=355544 boxes=1 published=1 total=746.05 ms status=ok
+
+[W1011 00:08:48.431332054 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:48.432484355 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 720.3ms
+Speed: 1.5ms preprocess, 720.3ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:49.050394120 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:49.051122632 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 626.0ms
+Speed: 4.8ms preprocess, 626.0ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:50.024390948 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:50.025134051 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 952.8ms
+Speed: 1.9ms preprocess, 952.8ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:51.288545755 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:51.291954301 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 1274.9ms
+Speed: 1.6ms preprocess, 1274.9ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:52.092267864 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:52.093064001 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 769.4ms
+Speed: 2.6ms preprocess, 769.4ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:52.686381863 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:52.687146852 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 585.2ms
+Speed: 1.5ms preprocess, 585.2ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:53.291655325 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:53.293374277 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 600.3ms
+Speed: 4.0ms preprocess, 600.3ms inference, 1.6ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:53.933879730 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:53.934646612 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 644.5ms
+Speed: 1.6ms preprocess, 644.5ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:54.631411399 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:54.632487969 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 677.5ms
+Speed: 3.3ms preprocess, 677.5ms inference, 1.7ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:55.222539575 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:55.223418365 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 583.7ms
+Speed: 1.4ms preprocess, 583.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+[INFO] [1791652135.334822771] [face_node]: [Callback #240] seq=355774 boxes=1 published=1 total=588.58 ms status=ok
+
+[W1011 00:08:55.828748065 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:55.829594949 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 607.6ms
+Speed: 4.4ms preprocess, 607.6ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:56.513929332 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:56.514957996 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 672.3ms
+Speed: 3.4ms preprocess, 672.3ms inference, 1.5ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:57.142559471 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:57.146081543 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 613.7ms
+Speed: 1.5ms preprocess, 613.7ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:57.750954143 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:57.751765050 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 598.2ms
+Speed: 1.7ms preprocess, 598.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:58.368113049 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:58.369482454 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 613.6ms
+Speed: 3.2ms preprocess, 613.6ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:59.129870159 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:59.131938753 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 754.2ms
+Speed: 1.7ms preprocess, 754.2ms inference, 1.4ms postprocess per image at shape (1, 3, 480, 640)
+
+[W1011 00:08:59.729830215 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 00:08:59.730654724 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+0: 480x640 1 face, 589.5ms
+Speed: 1.5ms preprocess, 589.5ms inference, 1.3ms postprocess per image at shape (1, 3, 480, 640)
+Recorded 247 callbacks over 180.469 monotonic seconds.
+CSV saved: /home/hafidz/smartclass_ws/experiments/face_pc_hikvision_13714347236728.csv

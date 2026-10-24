@@ -1,0 +1,11 @@
+{
+  "run_id": "activity_diag_20261019_190109_02da73",
+  "source_path": "/home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/activity_node.py",
+  "source_sha256": "20a97f5a5371f333c0dde63f6c38a65b1054fe7c7b3ed9ac79d94c97a9aa5c67",
+  "clock": "time.monotonic_ns",
+  "requested_seconds_after_init": 30,
+  "measurement": "original Activity callback including original logging",
+  "limitations": "Excludes subscription waiting time and end-to-end delay",
+  "end_status": "normal_duration",
+  "actual_seconds_after_init": 30.876702098
+}

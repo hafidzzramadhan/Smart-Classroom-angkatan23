@@ -1,0 +1,14 @@
+{
+  "run_id": "det_activity_link_20261019_213614_413169",
+  "source_path": "/home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/activity_node.py",
+  "source_sha256": "20a97f5a5371f333c0dde63f6c38a65b1054fe7c7b3ed9ac79d94c97a9aa5c67",
+  "boot_id": "789672f7-11f7-491f-97e1-2034728ffe9f",
+  "clock": "time.monotonic_ns",
+  "requested_seconds_after_init": 30,
+  "measurement": "original Activity callback including original logging",
+  "limitations": "Not camera-to-viewer delay; logger overhead not measured",
+  "ready_ns": 11843889766533,
+  "end_status": "normal_duration",
+  "end_ns": 11874035504164,
+  "actual_seconds_after_init": 30.145737631
+}

@@ -1,0 +1,22 @@
+{
+  "run_id": "merge_pilot01",
+  "mode": "merge",
+  "seconds_requested": 30.0,
+  "source": {
+    "module_path": "/home/hafidz/smartclass_ws/build/smartclass_cv/smartclass_cv/merge_node_test.py",
+    "source_path": "/home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/merge_node_test.py",
+    "sha256": "acfbac85ca00d717346b3adb9a081714bea1860cc4980ef9d9d0c8737fb87404"
+  },
+  "probe_sha256": "93d62b6f32a0c37fa354fc9df5d384e9e7382e11c065983ac15f081e96e86203",
+  "boot_id": "ba190a51-83b4-42ac-a702-7361dce1d15e",
+  "clock": "time.monotonic_ns",
+  "clock_info": {
+    "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution": 1e-09
+  },
+  "fusion_behavior": "original; live disabled; original disk writes/prints retained",
+  "measurement_limit": "software Merge-to-viewer; no camera E2E or physical display measurement",
+  "logging": "memory rows; CSV flush outside callbacks every 5 s; overhead not isolated"
+}

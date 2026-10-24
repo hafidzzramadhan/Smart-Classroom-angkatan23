@@ -1,0 +1,49 @@
+[INFO] [1791642780.225187993] [DetectionNodeInstrumented]: Loading model from: /home/hafidz/smartclass_ws/install/smartclass_cv/share/smartclass_cv/models/best.onnx
+[INFO] [1791642780.226993735] [DetectionNodeInstrumented]: Detection Node (INSTRUMENTED) Started
+Loading /home/hafidz/smartclass_ws/install/smartclass_cv/share/smartclass_cv/models/best.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.30.0 with CPUExecutionProvider
+[INFO] [1791642786.776048752] [DetectionNodeInstrumented]: [Frame #10] gap_antar_frame=332.6ms | cv2=0.2ms | inference=353.5ms | postproc=0.1ms | publish=4.6ms | TOTAL=358.4ms
+[INFO] [1791642790.355615815] [DetectionNodeInstrumented]: [Frame #20] gap_antar_frame=388.1ms | cv2=0.2ms | inference=375.4ms | postproc=0.1ms | publish=4.7ms | TOTAL=380.3ms
+[INFO] [1791642793.822037300] [DetectionNodeInstrumented]: [Frame #30] gap_antar_frame=374.2ms | cv2=0.2ms | inference=365.7ms | postproc=0.1ms | publish=2.8ms | TOTAL=368.8ms
+[INFO] [1791642797.703891073] [DetectionNodeInstrumented]: [Frame #40] gap_antar_frame=445.6ms | cv2=0.5ms | inference=428.0ms | postproc=0.2ms | publish=4.4ms | TOTAL=433.0ms
+[INFO] [1791642801.343546755] [DetectionNodeInstrumented]: [Frame #50] gap_antar_frame=350.1ms | cv2=0.2ms | inference=344.9ms | postproc=0.1ms | publish=4.4ms | TOTAL=349.6ms
+[INFO] [1791642807.424880885] [DetectionNodeInstrumented]: [Frame #60] gap_antar_frame=381.7ms | cv2=0.2ms | inference=371.8ms | postproc=0.1ms | publish=3.6ms | TOTAL=375.7ms
+[INFO] [1791642810.990368523] [DetectionNodeInstrumented]: [Frame #70] gap_antar_frame=357.1ms | cv2=0.2ms | inference=347.5ms | postproc=0.1ms | publish=3.6ms | TOTAL=351.5ms
+[INFO] [1791642814.421927341] [DetectionNodeInstrumented]: [Frame #80] gap_antar_frame=345.8ms | cv2=0.3ms | inference=340.5ms | postproc=0.1ms | publish=3.8ms | TOTAL=344.7ms
+[INFO] [1791642818.081638455] [DetectionNodeInstrumented]: [Frame #90] gap_antar_frame=425.5ms | cv2=0.2ms | inference=374.7ms | postproc=0.1ms | publish=4.3ms | TOTAL=379.3ms
+[INFO] [1791642821.804294277] [DetectionNodeInstrumented]: [Frame #100] gap_antar_frame=387.1ms | cv2=0.1ms | inference=547.8ms | postproc=0.1ms | publish=3.3ms | TOTAL=551.4ms
+[INFO] [1791642825.615888566] [DetectionNodeInstrumented]: [Frame #110] gap_antar_frame=393.9ms | cv2=0.2ms | inference=414.5ms | postproc=0.1ms | publish=5.6ms | TOTAL=420.3ms
+[INFO] [1791642829.245570386] [DetectionNodeInstrumented]: [Frame #120] gap_antar_frame=379.9ms | cv2=0.2ms | inference=383.7ms | postproc=0.1ms | publish=4.1ms | TOTAL=388.2ms
+[INFO] [1791642834.264070311] [DetectionNodeInstrumented]: [Frame #130] gap_antar_frame=615.7ms | cv2=0.2ms | inference=568.0ms | postproc=0.2ms | publish=7.6ms | TOTAL=576.0ms
+[INFO] [1791642837.998458375] [DetectionNodeInstrumented]: [Frame #140] gap_antar_frame=368.0ms | cv2=0.2ms | inference=350.0ms | postproc=0.2ms | publish=3.5ms | TOTAL=353.8ms
+[INFO] [1791642844.131107060] [DetectionNodeInstrumented]: [Frame #150] gap_antar_frame=296.9ms | cv2=0.2ms | inference=343.4ms | postproc=0.1ms | publish=3.6ms | TOTAL=347.3ms
+[INFO] [1791642847.738017983] [DetectionNodeInstrumented]: [Frame #160] gap_antar_frame=391.2ms | cv2=0.2ms | inference=372.2ms | postproc=0.1ms | publish=4.2ms | TOTAL=376.7ms
+[INFO] [1791642851.524323785] [DetectionNodeInstrumented]: [Frame #170] gap_antar_frame=364.7ms | cv2=0.2ms | inference=552.0ms | postproc=0.2ms | publish=8.6ms | TOTAL=561.0ms
+[INFO] [1791642855.146090572] [DetectionNodeInstrumented]: [Frame #180] gap_antar_frame=372.9ms | cv2=0.1ms | inference=351.2ms | postproc=0.1ms | publish=2.6ms | TOTAL=354.1ms
+[INFO] [1791642858.728123803] [DetectionNodeInstrumented]: [Frame #190] gap_antar_frame=336.2ms | cv2=0.1ms | inference=330.2ms | postproc=0.2ms | publish=2.4ms | TOTAL=332.9ms
+[INFO] [1791642862.411373268] [DetectionNodeInstrumented]: [Frame #200] gap_antar_frame=356.2ms | cv2=0.1ms | inference=347.1ms | postproc=0.1ms | publish=3.0ms | TOTAL=350.4ms
+[INFO] [1791642865.837778949] [DetectionNodeInstrumented]: [Frame #210] gap_antar_frame=364.7ms | cv2=0.2ms | inference=333.3ms | postproc=0.1ms | publish=3.7ms | TOTAL=337.2ms
+[INFO] [1791642869.546917259] [DetectionNodeInstrumented]: [Frame #220] gap_antar_frame=350.5ms | cv2=0.1ms | inference=358.7ms | postproc=0.2ms | publish=6.8ms | TOTAL=366.0ms
+[INFO] [1791642873.477813849] [DetectionNodeInstrumented]: [Frame #230] gap_antar_frame=365.7ms | cv2=0.1ms | inference=386.3ms | postproc=0.1ms | publish=2.7ms | TOTAL=389.3ms
+[INFO] [1791642879.525806117] [DetectionNodeInstrumented]: [Frame #240] gap_antar_frame=396.6ms | cv2=0.2ms | inference=373.9ms | postproc=0.1ms | publish=2.4ms | TOTAL=376.6ms
+[INFO] [1791642883.396464806] [DetectionNodeInstrumented]: [Frame #250] gap_antar_frame=415.3ms | cv2=0.2ms | inference=474.0ms | postproc=0.2ms | publish=12.4ms | TOTAL=486.8ms
+[INFO] [1791642887.200697840] [DetectionNodeInstrumented]: [Frame #260] gap_antar_frame=373.3ms | cv2=0.1ms | inference=333.0ms | postproc=0.1ms | publish=3.3ms | TOTAL=336.6ms
+[INFO] [1791642890.977064681] [DetectionNodeInstrumented]: [Frame #270] gap_antar_frame=445.2ms | cv2=0.4ms | inference=427.9ms | postproc=0.2ms | publish=4.4ms | TOTAL=432.9ms
+[INFO] [1791642895.823262275] [DetectionNodeInstrumented]: [Frame #280] gap_antar_frame=430.0ms | cv2=0.2ms | inference=471.4ms | postproc=0.1ms | publish=4.2ms | TOTAL=475.9ms
+[INFO] [1791642900.230068337] [DetectionNodeInstrumented]: [Frame #290] gap_antar_frame=405.4ms | cv2=0.1ms | inference=401.8ms | postproc=0.1ms | publish=3.9ms | TOTAL=406.0ms
+[INFO] [1791642904.196455531] [DetectionNodeInstrumented]: [Frame #300] gap_antar_frame=353.9ms | cv2=0.2ms | inference=361.0ms | postproc=0.1ms | publish=3.5ms | TOTAL=364.9ms
+[INFO] [1791642907.783366030] [DetectionNodeInstrumented]: [Frame #310] gap_antar_frame=357.9ms | cv2=0.2ms | inference=354.2ms | postproc=0.1ms | publish=3.9ms | TOTAL=358.4ms
+[INFO] [1791642913.813883756] [DetectionNodeInstrumented]: [Frame #320] gap_antar_frame=380.9ms | cv2=0.2ms | inference=347.1ms | postproc=0.1ms | publish=4.1ms | TOTAL=351.6ms
+[INFO] [1791642917.303739587] [DetectionNodeInstrumented]: [Frame #330] gap_antar_frame=350.6ms | cv2=0.2ms | inference=352.9ms | postproc=0.1ms | publish=4.4ms | TOTAL=357.7ms
+[INFO] [1791642920.912963297] [DetectionNodeInstrumented]: [Frame #340] gap_antar_frame=356.7ms | cv2=0.2ms | inference=377.5ms | postproc=0.1ms | publish=3.1ms | TOTAL=380.8ms
+[INFO] [1791642924.312355187] [DetectionNodeInstrumented]: [Frame #350] gap_antar_frame=339.5ms | cv2=0.1ms | inference=322.4ms | postproc=0.1ms | publish=2.1ms | TOTAL=324.8ms
+[INFO] [1791642927.802033007] [DetectionNodeInstrumented]: [Frame #360] gap_antar_frame=351.7ms | cv2=0.2ms | inference=331.9ms | postproc=0.1ms | publish=3.9ms | TOTAL=336.1ms
+[INFO] [1791642931.362103968] [DetectionNodeInstrumented]: [Frame #370] gap_antar_frame=340.6ms | cv2=0.2ms | inference=353.3ms | postproc=0.2ms | publish=3.9ms | TOTAL=357.5ms
+[INFO] [1791642934.853254535] [DetectionNodeInstrumented]: [Frame #380] gap_antar_frame=374.1ms | cv2=0.2ms | inference=320.4ms | postproc=0.1ms | publish=4.3ms | TOTAL=325.0ms
+[INFO] [1791642938.351654688] [DetectionNodeInstrumented]: [Frame #390] gap_antar_frame=337.0ms | cv2=0.1ms | inference=365.3ms | postproc=0.1ms | publish=2.4ms | TOTAL=367.9ms
+[INFO] [1791642941.915299233] [DetectionNodeInstrumented]: [Frame #400] gap_antar_frame=376.2ms | cv2=0.2ms | inference=354.3ms | postproc=0.1ms | publish=3.3ms | TOTAL=357.9ms
+[INFO] [1791642948.052241180] [DetectionNodeInstrumented]: [Frame #410] gap_antar_frame=384.4ms | cv2=0.3ms | inference=351.6ms | postproc=0.1ms | publish=3.0ms | TOTAL=355.0ms
+[INFO] [1791642951.627884454] [DetectionNodeInstrumented]: [Frame #420] gap_antar_frame=373.0ms | cv2=0.2ms | inference=324.9ms | postproc=0.2ms | publish=3.2ms | TOTAL=328.4ms
+[INFO] [1791642955.318996942] [DetectionNodeInstrumented]: [Frame #430] gap_antar_frame=367.0ms | cv2=0.1ms | inference=365.3ms | postproc=0.1ms | publish=2.7ms | TOTAL=368.3ms
+[INFO] [1791642958.686529462] [DetectionNodeInstrumented]: [Frame #440] gap_antar_frame=332.6ms | cv2=0.2ms | inference=345.1ms | postproc=0.1ms | publish=2.9ms | TOTAL=348.3ms
+[INFO] [1791642962.124149032] [DetectionNodeInstrumented]: [Frame #450] gap_antar_frame=327.6ms | cv2=0.2ms | inference=344.6ms | postproc=0.1ms | publish=3.0ms | TOTAL=347.8ms

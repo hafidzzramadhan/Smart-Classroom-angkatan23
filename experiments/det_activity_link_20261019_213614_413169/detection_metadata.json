@@ -1,0 +1,10 @@
+{
+  "run_id": "det_activity_link_20261019_213614_413169",
+  "source_path": "/home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/detection_node.py",
+  "source_sha256": "cf9cc47d72b365c13f1d5c6261ec25abcf00413633d722cdd69031ba3209fcfa",
+  "boot_id": "789672f7-11f7-491f-97e1-2034728ffe9f",
+  "clock": "time.monotonic_ns",
+  "measurement": "before and after person publisher.publish",
+  "limitations": "Publish return does not confirm subscriber receipt",
+  "ready_ns": 11347677141533
+}

@@ -1,0 +1,48 @@
+2026-10-11T18:22:38+07:00
+/DetectionNode
+/Expression
+/face_node
+/frame_node
+Type: smartclass_msgs/msg/BondingBoxCv
+
+Publisher count: 1
+
+Node name: face_node
+Node namespace: /
+Topic type: smartclass_msgs/msg/BondingBoxCv
+Topic type hash: RIHS01_27f10534b006ecc04ab16b97d971a43f398b27a7ac2791f4935a19396120e3ff
+Endpoint type: PUBLISHER
+GID: 01.0f.89.d2.b7.0b.74.50.00.00.00.00.00.00.14.03
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Subscription count: 1
+
+Node name: Expression
+Node namespace: /
+Topic type: smartclass_msgs/msg/BondingBoxCv
+Topic type hash: RIHS01_27f10534b006ecc04ab16b97d971a43f398b27a7ac2791f4935a19396120e3ff
+Endpoint type: SUBSCRIPTION
+GID: 01.0f.89.d2.f5.0b.32.70.00.00.00.00.00.00.13.04
+QoS profile:
+  Reliability: RELIABLE
+  History (Depth): UNKNOWN
+  Durability: VOLATILE
+  Lifespan: Infinite
+  Deadline: Infinite
+  Liveliness: AUTOMATIC
+  Liveliness lease duration: Infinite
+
+Python: /home/hafidz/smartclass_ws/.venv/bin/python3
+face path: /home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/face_node.py
+face SHA256: 190f71d4b08617cbc23d24c7a8811ce56725db91f552d2f261882cf2a9ff6cb7
+expression path: /home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/expression_node.py
+expression SHA256: b11f9004549363717b828adac6da728ac333d43ee6c94e7f5566447ef90b3c6f
+expression_probe path: /home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/expression_baseline_probe.py
+expression_probe SHA256: 87180f62543359aa3846a8b19b797b5fe1dd92fb524bcdafc3d5a4b46b5cab67

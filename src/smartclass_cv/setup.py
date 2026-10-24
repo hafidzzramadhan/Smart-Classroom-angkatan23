@@ -45,13 +45,17 @@ setup(
             'detection_debug = smartclass_cv.detection_node_instrumented:main',
             'face = smartclass_cv.face_node:main',
             'recognition = smartclass_cv.recognition_node:main',
+            'recognition_debug = smartclass_cv.recognition_baseline_probe:main',
             'expression = smartclass_cv.expression_node:main',
+            'expression_debug = smartclass_cv.expression_baseline_probe:main',
             'merge = smartclass_cv.merge_node:main',
             'merge_test = smartclass_cv.merge_node_test:main',
             'attendance = smartclass_cv.attendance_node:main',
             'activity = smartclass_cv.activity_node:main',
             'gesture = smartclass_cv.gesture_node:main',
             'activate = smartclass_cv.wakeon_node:main'
+        ,
+            'gesture_debug = smartclass_cv.gesture_baseline_probe:main',
         ],
     },
 )

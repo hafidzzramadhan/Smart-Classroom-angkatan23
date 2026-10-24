@@ -1,0 +1,132 @@
+Original expression source: /home/hafidz/smartclass_ws/src/smartclass_cv/smartclass_cv/expression_node.py
+SHA256: b11f9004549363717b828adac6da728ac333d43ee6c94e7f5566447ef90b3c6f
+CSV: /home/hafidz/smartclass_ws/experiments/expression_pc_hikvision_10463681474091.csv
+[INFO] [1791717719.400696036] [Expression]: 📦 Model path: /home/hafidz/smartclass_ws/install/smartclass_cv/share/smartclass_cv/models/best.pt
+[INFO] [1791717720.138738362] [Expression]: ✅ NODE READY - Emotion Detection
+[ERROR] [1791717720.139940805] [Expression]: ❌ Error verifying ONNX model: name 'onnx' is not defined
+Node initialization: 896.07 ms
+Model: /home/hafidz/smartclass_ws/install/smartclass_cv/share/smartclass_cv/models/best.pt
+Recording about 180 seconds; each row is one face crop.
+[W1011 18:22:11.659397486 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:11.683106648 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:21:59.819 time 2026-10-11 18:22:11 
+[W1011 18:22:15.772520270 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:15.800479640 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:02.613 time 2026-10-11 18:22:15 
+Terima
+emosi - sad frame 2026-10-11 18:22:06.602 time 2026-10-11 18:22:19 
+Terima
+emosi - sad frame 2026-10-11 18:22:10.701 time 2026-10-11 18:22:24 
+[W1011 18:22:27.128463048 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:27.144727255 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+Terima
+emosi - sad frame 2026-10-11 18:22:19.710 time 2026-10-11 18:22:31 
+[W1011 18:22:35.628769069 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:35.656441000 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - happy frame 2026-10-11 18:22:24.782 time 2026-10-11 18:22:35 
+[W1011 18:22:38.167373161 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:38.188419924 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:28.981 time 2026-10-11 18:22:39 
+[W1011 18:22:42.340097553 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:42.361787619 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:33.180 time 2026-10-11 18:22:43 
+[W1011 18:22:46.416461336 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:46.435114822 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:37.607 time 2026-10-11 18:22:47 
+[Callback #10] seq=244731 boxes=1 published=1 total=4085.33 ms status=ok
+[W1011 18:22:51.617645067 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:51.640467459 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:42.275 time 2026-10-11 18:22:51 
+Terima
+[W1011 18:22:59.971441865 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:22:59.995488096 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:22:51.547 time 2026-10-11 18:23:00 
+[W1011 18:23:03.108196751 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:03.127414115 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+Terima
+[W1011 18:23:11.958079791 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:11.977746653 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - neutral frame 2026-10-11 18:23:04.106 time 2026-10-11 18:23:12 
+[W1011 18:23:15.895807861 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:15.911190521 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:08.137 time 2026-10-11 18:23:15 
+[W1011 18:23:19.629404781 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:19.646765247 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:12.011 time 2026-10-11 18:23:19 
+[W1011 18:23:23.799120464 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:23.824937188 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:15.908 time 2026-10-11 18:23:23 
+Terima
+emosi - neutral frame 2026-10-11 18:23:19.705 time 2026-10-11 18:23:28 
+[Callback #20] seq=245994 boxes=1 published=1 total=3766.24 ms status=ok
+Terima
+emosi - sad frame 2026-10-11 18:23:24.038 time 2026-10-11 18:23:32 
+[W1011 18:23:35.279758830 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:35.300726963 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:28.081 time 2026-10-11 18:23:36 
+[W1011 18:23:40.012431555 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:40.038304531 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:32.105 time 2026-10-11 18:23:41 
+[W1011 18:23:45.593934248 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:45.615277329 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:36.606 time 2026-10-11 18:23:45 
+[W1011 18:23:49.838225213 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:23:49.859209765 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:23:41.333 time 2026-10-11 18:23:49 
+emosi - neutral frame 2026-10-11 18:23:41.333 time 2026-10-11 18:23:49 
+Terima
+emosi - sad frame 2026-10-11 18:23:45.941 time 2026-10-11 18:23:54 
+Terima
+emosi - sad frame 2026-10-11 18:23:49.967 time 2026-10-11 18:23:58 
+Terima
+emosi - sad frame 2026-10-11 18:23:54.339 time 2026-10-11 18:24:02 
+Terima
+emosi - sad frame 2026-10-11 18:23:58.640 time 2026-10-11 18:24:07 
+Terima
+emosi - sad frame 2026-10-11 18:24:02.968 time 2026-10-11 18:24:11 
+[Callback #30] seq=247289 boxes=1 published=1 total=4106.05 ms status=ok
+Terima
+emosi - sad frame 2026-10-11 18:24:07.107 time 2026-10-11 18:24:15 
+Terima
+emosi - sad frame 2026-10-11 18:24:11.571 time 2026-10-11 18:24:20 
+[W1011 18:24:24.080652402 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:24:24.099116019 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:24:15.992 time 2026-10-11 18:24:25 
+Terima
+emosi - sad frame 2026-10-11 18:24:20.803 time 2026-10-11 18:24:29 
+[W1011 18:24:32.408471970 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+[W1011 18:24:32.427822993 NNPACK.cpp:56] Could not initialize NNPACK! Reason: Unsupported hardware.
+Terima
+emosi - sad frame 2026-10-11 18:24:25.313 time 2026-10-11 18:24:33 
+Terima
+emosi - sad frame 2026-10-11 18:24:29.439 time 2026-10-11 18:24:37 
+Terima
+emosi - sad frame 2026-10-11 18:24:33.543 time 2026-10-11 18:24:42 
+Terima
+emosi - sad frame 2026-10-11 18:24:37.844 time 2026-10-11 18:24:46 
+Terima
+Terima
+[Callback #40] seq=248596 boxes=0 published=0 total=4154.58 ms status=ok
+Terima
+emosi - sad frame 2026-10-11 18:24:51.686 time 2026-10-11 18:24:59 
+Recorded 41 callbacks over 180.021 monotonic seconds.
+CSV saved: /home/hafidz/smartclass_ws/experiments/expression_pc_hikvision_10463681474091.csv
