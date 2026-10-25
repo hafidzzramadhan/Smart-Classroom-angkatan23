@@ -1,0 +1,6 @@
+Loading /home/hafidz/smartclass_ws/src/smartclass_cv/models/best.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.30.0 with CPUExecutionProvider
+OK  /home/hafidz/smartclass_ws/server/test_activity_internet/zidane.jpg local=[(0, 0.42642703652381897)] remote=[(0, 0.42642703652381897)] max_conf_diff=0.00000
+OK  /home/hafidz/smartclass_ws/server/test_activity_internet/bus.jpg local=[(0, 0.8645747900009155), (0, 0.8515043258666992)] remote=[(0, 0.8645747900009155), (0, 0.8515043258666992)] max_conf_diff=0.00000
+
+2 gambar, 0 berbeda

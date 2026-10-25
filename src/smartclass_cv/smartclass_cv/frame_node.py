@@ -5,6 +5,7 @@ import datetime
 import cv2
 import numpy as np
 
+from rcl_interfaces.msg import ParameterDescriptor
 from std_msgs.msg import Int64
 from cv_bridge import CvBridge
 from smartclass_msgs.msg import FrameCv
@@ -37,26 +38,44 @@ class FramePublisher(Node):
 
         self.bridge = CvBridge()
 
-        self.cap = cv2.VideoCapture(0)
+        # source : '0' (angka) -> kamera/webcam index tsb (perilaku lama)
+        #          path file video atau URL (rtsp://...) -> dibaca sebagai video
+        dyn = ParameterDescriptor(dynamic_typing=True)
+        self.declare_parameter("source", "0", dyn)
+        self.declare_parameter("loop", False)       # ulang video dari awal saat habis
+        self.declare_parameter("width", 640)        # resize utk sumber non-kamera
+        self.declare_parameter("height", 480)
+        self.declare_parameter("target_fps", 30.0)
 
-        self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
-        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        self.cap.set(cv2.CAP_PROP_FPS, 30)
+        source = str(self.get_parameter("source").value)
+        self.is_camera = source.isdigit()
+        self.source = int(source) if self.is_camera else source
+        self.loop = bool(self.get_parameter("loop").value)
+        self.width = int(self.get_parameter("width").value)
+        self.height = int(self.get_parameter("height").value)
+        self._ended = False
+
+        self.cap = cv2.VideoCapture(self.source)
+
+        if self.is_camera:
+            self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+            self.cap.set(cv2.CAP_PROP_FPS, 30)
 
         if not self.cap.isOpened():
             self.get_logger().error(
-                "❌ Kamera tidak bisa dibuka"
+                f"❌ Sumber video tidak bisa dibuka: {source}"
             )
             raise RuntimeError(
-                "Kamera /dev/video0 tidak dapat dibuka"
+                f"Sumber video tidak dapat dibuka: {source}"
             )
 
         # =====================================================
         # FPS
         # =====================================================
 
-        self.target_fps = 30.0
+        self.target_fps = float(self.get_parameter("target_fps").value)
 
         self.timer = self.create_timer(
             1.0 / self.target_fps,
@@ -104,7 +123,8 @@ class FramePublisher(Node):
         )
 
         self.get_logger().info(
-            f"Camera index : 0"
+            f"Source       : {source} "
+            f"(camera={self.is_camera}, loop={self.loop})"
         )
 
         self.get_logger().info(
@@ -201,6 +221,35 @@ class FramePublisher(Node):
         return msg
 
     # =========================================================
+    # READ FRAME (kamera atau file/stream video)
+    # =========================================================
+
+    def _read_frame(self):
+
+        ret, frame = self.cap.read()
+
+        if not ret and not self.is_camera:
+
+            if self.loop:
+                self.cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                ret, frame = self.cap.read()
+
+            elif not self._ended:
+                self._ended = True
+                self.get_logger().info("🎬 Video selesai")
+                self.timer.cancel()
+
+        # Samakan resolusi video dengan beban kamera (640x480).
+        if (
+            ret
+            and not self.is_camera
+            and (frame.shape[1] != self.width or frame.shape[0] != self.height)
+        ):
+            frame = cv2.resize(frame, (self.width, self.height))
+
+        return ret, frame
+
+    # =========================================================
     # PUBLISH FRAME
     # =========================================================
 
@@ -210,7 +259,7 @@ class FramePublisher(Node):
         # 1. Ambil frame dari kamera
         # -----------------------------------------------------
 
-        ret, frame = self.cap.read()
+        ret, frame = self._read_frame()
 
         if not ret:
 

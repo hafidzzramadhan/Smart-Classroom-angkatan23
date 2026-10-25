@@ -1,0 +1,24 @@
+Loading ../src/smartclass_cv/models/best.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.30.0 with CPUExecutionProvider
+BEDA test_activity_internet/coco_000000000165.jpg local=[(0, 0.44588226079940796)] remote=[(0, 0.5024175643920898)] max_conf_diff=0.05654
+BEDA test_activity_internet/coco_000000000036.jpg local=[(0, 0.6426474452018738)] remote=[(0, 0.6773695945739746)] max_conf_diff=0.03472
+BEDA test_activity_internet/zidane.jpg local=[(0, 0.42642703652381897)] remote=[(0, 0.4205862283706665)] max_conf_diff=0.00584
+BEDA test_activity_internet/coco_000000000110.jpg local=[(0, 0.5786523222923279)] remote=[(0, 0.5636012554168701)] max_conf_diff=0.01505
+OK  test_activity_internet/coco_000000000009.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_activity_internet/coco_000000000077.jpg local=[(0, 0.7214044332504272)] remote=[(0, 0.7318312525749207)] max_conf_diff=0.01043
+OK  test_activity_internet/coco_000000000151.jpg local=[] remote=[] max_conf_diff=0.00000
+OK  test_activity_internet/coco_000000000127.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_activity_internet/coco_000000000149.jpg local=[(0, 0.6259366273880005), (0, 0.48327770829200745)] remote=[(0, 0.5761913061141968), (0, 0.4303901493549347)] max_conf_diff=0.05289
+OK  test_activity_internet/coco_000000000030.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_activity_internet/coco_000000000113.jpg local=[(0, 0.6060463190078735)] remote=[(0, 0.5738192796707153)] max_conf_diff=0.03223
+BEDA test_activity_internet/coco_000000000192.jpg local=[(0, 0.9170665740966797), (0, 0.8873729705810547), (0, 0.7299636602401733), (0, 0.6129322648048401)] remote=[(0, 0.9170688390731812), (0, 0.8831013441085815), (0, 0.7242656946182251), (0, 0.6024094820022583)] max_conf_diff=0.01052
+OK  test_activity_internet/coco_000000000074.jpg local=[] remote=[] max_conf_diff=0.00000
+OK  test_activity_internet/bus.jpg local=[(0, 0.8645747900009155), (0, 0.8515043258666992)] remote=[(0, 0.8639616966247559), (0, 0.8507420420646667)] max_conf_diff=0.00076
+BEDA test_activity_internet/coco_000000000086.jpg local=[(0, 0.7136234045028687)] remote=[(0, 0.7157281637191772)] max_conf_diff=0.00210
+BEDA test_activity_internet/coco_000000000061.jpg local=[(0, 0.7092740535736084), (0, 0.554206132888794), (0, 0.4456577003002167)] remote=[(0, 0.7222452163696289), (0, 0.5785960555076599), (0, 0.4918183386325836)] max_conf_diff=0.04616
+OK  test_activity_internet/coco_000000000109.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_activity_internet/coco_000000000049.jpg local=[(0, 0.7930032014846802)] remote=[(0, 0.7903826832771301)] max_conf_diff=0.00262
+OK  test_activity_internet/coco_000000000025.jpg local=[] remote=[] max_conf_diff=0.00000
+OK  test_activity_internet/coco_000000000136.jpg local=[(0, 0.8136193752288818)] remote=[(0, 0.8141118884086609)] max_conf_diff=0.00049
+
+20 gambar, 11 berbeda

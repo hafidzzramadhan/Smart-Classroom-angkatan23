@@ -1,0 +1,7 @@
+OK  /home/hafidz/smartclass_ws/server/test_images_internet/71579058.jpg local=[('neutral', 0.8416043519973755)] remote=[('neutral', 0.8416043519973755)] max_conf_diff=0.00000
+OK  /home/hafidz/smartclass_ws/server/test_images_internet/44820917.jpg local=[('content', 0.55806964635849), ('neutral', 0.5225192904472351)] remote=[('content', 0.55806964635849), ('neutral', 0.5225192904472351)] max_conf_diff=0.00000
+OK  /home/hafidz/smartclass_ws/server/test_images_internet/46106121.jpg local=[('content', 0.8615086674690247)] remote=[('content', 0.8615086674690247)] max_conf_diff=0.00000
+OK  /home/hafidz/smartclass_ws/server/test_images_internet/06815248.jpg local=[('sad', 0.5186838507652283)] remote=[('sad', 0.5186838507652283)] max_conf_diff=0.00000
+OK  /home/hafidz/smartclass_ws/server/test_images_internet/11081001.jpg local=[('sad', 0.6388186812400818)] remote=[('sad', 0.6388186812400818)] max_conf_diff=0.00000
+
+5 gambar, 0 berbeda

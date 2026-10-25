@@ -29,3 +29,9 @@ saved_detected_person/
 
 # Experiment logs/data
 *_timing_log.csv
+
+# Video, gambar uji, dan cadangan lokal
+kelas_test.*
+server/test_*_internet/
+*.backup_*
+experiments/*.db

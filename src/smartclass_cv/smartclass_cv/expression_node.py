@@ -1,19 +1,13 @@
+import os
+from datetime import datetime
+
 import rclpy
 from rclpy.node import Node
 from smartclass_msgs.msg import BondingBoxCv
-from smartclass_msgs.msg import ResultCv
-from std_msgs.msg import String
 from cv_bridge import CvBridge
-
-import cv2
-import sqlite3
-import os
-import json
-from datetime import datetime
-
-import torch
-from ultralytics import YOLO
 from ament_index_python.packages import get_package_share_directory
+
+from smartclass_cv.remote_client import RemoteError, RemoteModel, RttStats
 
 
 class Expression(Node):
@@ -21,26 +15,45 @@ class Expression(Node):
         super().__init__('Expression')
 
         # =========================
-        # PATH HANDLING (ROS2 WAY)
+        # PARAMETER
         # =========================
-        pkg_path = get_package_share_directory('smartclass_cv')
+        # mode      : 'local'  -> model dijalankan di node ini (perilaku lama)
+        #             'remote' -> model dipanggil di server lewat HTTP
+        self.declare_parameter('mode', 'local')
+        self.declare_parameter('server_url', 'http://127.0.0.1:8000')
+        self.declare_parameter('timeout_s', 1.0)
+        self.declare_parameter('image_format', 'jpg')   # 'jpg' atau 'png'
+        self.declare_parameter('jpeg_quality', 90)
+        self.declare_parameter('model_path', '')        # kosong -> models/best.pt
 
-        # Model path (read-only, from install/share)
-        self.model_path = os.path.join(pkg_path, 'models', 'best.pt') 
-
-        self.get_logger().info(f"📦 Model path: {self.model_path}") 
+        self.mode = self.get_parameter('mode').value
+        if self.mode not in ('local', 'remote'):
+            raise ValueError("parameter 'mode' harus 'local' atau 'remote'")
 
         # =========================
-        # LOAD YOLO MODEL
+        # MODEL
         # =========================
-        
-        # Use the context manager to load the model safely
-        #with torch.serialization.safe_globals([YOLO]):
-          #  self.model = torch.load(self.model_path, map_location=torch.device('cpu')) 
-            #self.model = torch.load(self.model_path)  # Memuat model .pt menggunakan PyTorch
-            #self.model.eval()  # Set model ke mode evaluasi
+        if self.mode == 'local':
+            from ultralytics import YOLO  # hanya dibutuhkan di mode local
 
-        self.model = YOLO(self.model_path)
+            model_path = self.get_parameter('model_path').value
+            if not model_path:
+                model_path = os.path.join(
+                    get_package_share_directory('smartclass_cv'),
+                    'models', 'best.pt')
+            self.get_logger().info(f"📦 Model path: {model_path}")
+            self.model = YOLO(model_path)
+        else:
+            url = self.get_parameter('server_url').value.rstrip('/') + '/expression'
+            self.remote = RemoteModel(
+                url,
+                timeout=self.get_parameter('timeout_s').value,
+                image_format=self.get_parameter('image_format').value,
+                jpeg_quality=self.get_parameter('jpeg_quality').value,
+            )
+            self.stats = RttStats(self.get_logger(), 'expression')
+            self.get_logger().info(f"🌐 Remote model: {url}")
+
         # =========================
         # ROS2 COMMUNICATION
         # =========================
@@ -59,52 +72,49 @@ class Expression(Node):
 
         self.br = CvBridge()
 
-        self.get_logger().info("✅ NODE READY - Emotion Detection")
+        self.get_logger().info(f"✅ NODE READY - Emotion Detection (mode={self.mode})")
 
-       # Verifikasi dan load model ONNX menggunakan onnxruntime
-        self.verify_onnx_model()
+    # ------------------------------------------------------------------
+    # Inferensi: hasilnya selalu list[(label, confidence)]
+    # ------------------------------------------------------------------
+    def _infer_local(self, frame):
+        results = self.model(frame, conf=0.5, verbose=False)
+        out = []
+        for r in results:
+            if r.boxes is None:
+                continue
+            for box in r.boxes:
+                out.append((self.model.names[int(box.cls[0])], float(box.conf[0])))
+        return out
 
-    def verify_onnx_model(self):
-        """Verifikasi model ONNX untuk memastikan itu valid dan siap digunakan."""
+    def _infer_remote(self, frame):
         try:
-            # Cek jika file model ONNX valid
-            onnx_model = onnx.load(self.model_path)
-            onnx.checker.check_model(onnx_model)  # Verifikasi model
+            res = self.remote.infer(frame)
+        except RemoteError as e:
+            self.stats.add_fail(e)
+            return []
+        self.stats.add(res)
+        return [(d['label'], float(d['conf'])) for d in res['detections']]
 
-            # Buat session inference dengan ONNX Runtime
-            ort_session = ort.InferenceSession(self.model_path)
-
-            # Log jika model ONNX valid
-            self.get_logger().info("✅ ONNX model is valid and ready for inference.")
-
-        except Exception as e:
-            self.get_logger().error(f"❌ Error verifying ONNX model: {e}")
-            
     def listener_callback(self, msg: BondingBoxCv):
         try:
             # 1. ROS Image → OpenCV
             frame = self.br.imgmsg_to_cv2(msg.cropped_image)
 
-            # 2. YOLO Emotion Inference
-            results = self.model(frame, conf=0.5, verbose=False)
+            # 2. Inferensi (lokal atau di server)
+            if self.mode == 'local':
+                emotions = self._infer_local(frame)
+            else:
+                emotions = self._infer_remote(frame)
 
-            emotions_detected = []
             print("Terima")
-            for r in results:
-                if r.boxes is None:
-                    continue
-
-                for box in r.boxes:
-                    cls_id = int(box.cls[0])
-                    emotion = self.model.names[cls_id]
-                    conf = float(box.conf[0])
-
-                    waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    print(f"emosi - {emotion} frame {msg.frame_id} time {waktu} ") 
-                    msg.label = emotion 
-                    msg.confident_level = round(conf, 2)
-                    msg.timestamp = waktu 
-                    self.pub.publish(msg)
+            for emotion, conf in emotions:
+                waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"emosi - {emotion} frame {msg.frame_id} time {waktu} ")
+                msg.label = emotion
+                msg.confident_level = round(conf, 2)
+                msg.timestamp = waktu
+                self.pub.publish(msg)
 
         except Exception as e:
             self.get_logger().error(f"❌ Error: {e}")

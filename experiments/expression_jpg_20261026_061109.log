@@ -1,0 +1,22 @@
+BEDA test_images_internet/71960898.jpg local=[('anger', 0.5086820721626282)] remote=[('anger', 0.5166242122650146)] max_conf_diff=0.00794
+BEDA test_images_internet/71579058.jpg local=[('neutral', 0.8416043519973755)] remote=[('neutral', 0.8386158347129822)] max_conf_diff=0.00299
+BEDA test_images_internet/44437606.jpg local=[('neutral', 0.6550000905990601)] remote=[('neutral', 0.6497746706008911)] max_conf_diff=0.00523
+BEDA test_images_internet/47668189.jpg local=[('neutral', 0.5187878012657166)] remote=[('neutral', 0.5176966786384583)] max_conf_diff=0.00109
+BEDA test_images_internet/44820917.jpg local=[('content', 0.55806964635849), ('neutral', 0.5225192904472351)] remote=[('content', 0.5504376292228699), ('neutral', 0.5156033635139465)] max_conf_diff=0.00763
+OK  test_images_internet/43524856.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_images_internet/71965075.jpg local=[('neutral', 0.6531481742858887)] remote=[('neutral', 0.6635084748268127)] max_conf_diff=0.01036
+OK  test_images_internet/46106121.jpg local=[('content', 0.8615086674690247)] remote=[('content', 0.8619890213012695)] max_conf_diff=0.00048
+OK  test_images_internet/06815248.jpg local=[('sad', 0.5186838507652283)] remote=[('sad', 0.5195345878601074)] max_conf_diff=0.00085
+OK  test_images_internet/71596657.jpg local=[('neutral', 0.8474588394165039)] remote=[('neutral', 0.8478760123252869)] max_conf_diff=0.00042
+OK  test_images_internet/46802726.jpg local=[] remote=[] max_conf_diff=0.00000
+OK  test_images_internet/48239881.jpg local=[('neutral', 0.8372710943222046)] remote=[('neutral', 0.8377943634986877)] max_conf_diff=0.00052
+BEDA test_images_internet/48357118.jpg local=[('neutral', 0.774334728717804)] remote=[('neutral', 0.7663635611534119)] max_conf_diff=0.00797
+OK  test_images_internet/60581216.jpg local=[('neutral', 0.6953010559082031)] remote=[('neutral', 0.6952630281448364)] max_conf_diff=0.00004
+BEDA test_images_internet/11081001.jpg local=[('sad', 0.6388186812400818)] remote=[('sad', 0.6441168189048767)] max_conf_diff=0.00530
+OK  test_images_internet/45342163.jpg local=[] remote=[] max_conf_diff=0.00000
+BEDA test_images_internet/45952868.jpg local=[('neutral', 0.7056944966316223)] remote=[('neutral', 0.7171808481216431)] max_conf_diff=0.01149
+BEDA test_images_internet/61321442.jpg local=[('neutral', 0.5179499983787537)] remote=[('neutral', 0.5193895697593689)] max_conf_diff=0.00144
+BEDA test_images_internet/48030105.jpg local=[('neutral', 0.5329292416572571), ('anger', 0.5190231800079346)] remote=[('neutral', 0.5426657795906067), ('anger', 0.5081803798675537)] max_conf_diff=0.01084
+BEDA test_images_internet/15340193.jpg local=[('neutral', 0.7675864100456238)] remote=[('neutral', 0.7719116806983948)] max_conf_diff=0.00433
+
+20 gambar, 12 berbeda
