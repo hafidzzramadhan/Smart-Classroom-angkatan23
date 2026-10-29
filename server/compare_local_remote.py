@@ -12,6 +12,7 @@ PNG = lossless (selisih harus ~0, pakai --tol 1e-6). JPG = lossy (selisih kecil 
 """
 import argparse
 import glob
+import os
 import sys
 
 import cv2
@@ -45,7 +46,9 @@ for f in files:
         x1, y1, x2, y2 = map(int, box.xyxy[0])
         local.append((key, float(box.conf[0]), (x1, y1, x2, y2)))
     ok, buf = cv2.imencode("." + a.fmt, img, params)
-    d = requests.post(f"{a.url}/{a.kind}", data=buf.tobytes(), timeout=10).json()["detections"]
+    token = os.environ.get("SMARTCLASS_API_TOKEN", "")
+    hdr = {"Authorization": f"Bearer {token}"} if token else {}
+    d = requests.post(f"{a.url}/{a.kind}", data=buf.tobytes(), headers=hdr, timeout=10).json()["detections"]
     remote = []
     for x in d:
         if a.kind == "expression":

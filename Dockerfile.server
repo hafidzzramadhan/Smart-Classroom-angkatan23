@@ -1,0 +1,23 @@
+FROM python:3.11-slim
+
+# libgl1 & libglib2.0-0: dibutuhkan opencv (dependensi ultralytics)
+RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# torch versi CPU saja (server tidak punya GPU) supaya image tidak membengkak
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+COPY server/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY server/app.py .
+
+# Model TIDAK ada di image; dipasang sebagai volume read-only di /models
+ENV EXPRESSION_MODEL=/models/best.pt \
+    ACTIVITY_MODEL=/models/best.onnx \
+    OMP_NUM_THREADS=1
+
+EXPOSE 8000
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -3,6 +3,7 @@
 Node tetap berjalan di Raspberry Pi / PC; hanya inferensi model yang
 dikirim ke server lewat HTTP (POST gambar -> JSON).
 """
+import os
 import time
 from collections import deque
 
@@ -27,6 +28,10 @@ class RemoteModel:
             else []
         )
         self.session = requests.Session()  # koneksi dipakai ulang
+        # Token dibaca dari environment (jangan ditulis di kode / parameter ROS).
+        token = os.environ.get("SMARTCLASS_API_TOKEN", "")
+        if token:
+            self.session.headers["Authorization"] = f"Bearer {token}"
 
     def infer(self, bgr):
         """Kirim satu gambar BGR. Return dict dari server + rtt_ms & encode_ms."""

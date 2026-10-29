@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 
 from rcl_interfaces.msg import ParameterDescriptor
+from smartclass_cv.frame_filter import FrameFilter
 from std_msgs.msg import Int64
 from cv_bridge import CvBridge
 from smartclass_msgs.msg import FrameCv
@@ -96,19 +97,32 @@ class FramePublisher(Node):
         # SIMILARITY
         # =====================================================
 
-        self.preframe = None
+        # Filter frame di sumber (solusi 1 untuk delay). Default = tanpa filter,
+        # jadi perilaku lama tidak berubah.
+        #   decimate_n          : teruskan 1 dari tiap N frame (1 = semua)
+        #   use_similarity      : buang frame yang mirip dengan frame terakhir
+        #                         yang diteruskan
+        #   similarity_threshold: ambang MSE (skala gambar kecil 80x60)
+        #   similarity_max_skip : paksa satu frame lolos setelah sekian frame
+        #                         mirip berturut-turut dibuang (0 = nonaktif)
+        #   stats_every         : cetak ringkasan filter tiap N tick (0 = mati)
+        #   verbose             : cetak "sequence take" per frame
+        self.declare_parameter("decimate_n", 1)
+        self.declare_parameter("use_similarity", False)
+        self.declare_parameter("similarity_threshold", 30.0)
+        self.declare_parameter("similarity_max_skip", 15)
+        self.declare_parameter("stats_every", 150)
+        self.declare_parameter("verbose", False)
 
-        # Untuk sementara similarity filter DIMATIKAN.
-        #
-        # Tujuannya:
-        # kita ingin memastikan /cv/frame mampu
-        # mengirim frame secara stabil terlebih dahulu.
-        #
-        # Setelah FPS stabil, similarity filter bisa
-        # kita aktifkan kembali jika memang diperlukan.
-        self.use_similarity_filter = False
-
-        self.similarity_threshold = 30.0
+        self.filter = FrameFilter(
+            decimate_n=self.get_parameter("decimate_n").value,
+            use_similarity=self.get_parameter("use_similarity").value,
+            threshold=self.get_parameter("similarity_threshold").value,
+            max_skip=self.get_parameter("similarity_max_skip").value,
+        )
+        self.stats_every = int(self.get_parameter("stats_every").value)
+        self.verbose = bool(self.get_parameter("verbose").value)
+        self._ticks = 0
 
         # =====================================================
         # LOG
@@ -132,8 +146,9 @@ class FramePublisher(Node):
         )
 
         self.get_logger().info(
-            f"Similarity   : "
-            f"{self.use_similarity_filter}"
+            f"Filter       : decimate_n={self.filter.decimate_n} "
+            f"similarity={self.filter.use_similarity} "
+            f"(thr={self.filter.threshold}, max_skip={self.filter.max_skip})"
         )
 
         self.get_logger().info(
@@ -282,31 +297,7 @@ class FramePublisher(Node):
         # kita uji kembali.
         # -----------------------------------------------------
 
-        should_publish = True
-
-        if self.use_similarity_filter:
-
-            if self.preframe is None:
-
-                should_publish = True
-
-            else:
-
-                error = self.isSimilar(
-                    self.preframe,
-                    frame
-                )
-
-                print(
-                    f"error - {error}"
-                )
-
-                should_publish = (
-                    error >
-                    self.similarity_threshold
-                )
-
-            self.preframe = frame.copy()
+        should_publish, _reason = self.filter.decide(frame)
 
         # -----------------------------------------------------
         # 3. Publish frame
@@ -322,10 +313,11 @@ class FramePublisher(Node):
                 msg
             )
 
-            print(
-                f"sequence take - "
-                f"{self.frame_sequence.data}"
-            )
+            if self.verbose:
+                print(
+                    f"sequence take - "
+                    f"{self.frame_sequence.data}"
+                )
 
             self.frame_sampling.data += 1
 
@@ -342,6 +334,10 @@ class FramePublisher(Node):
         # -----------------------------------------------------
 
         self.frame_sequence.data += 1
+
+        self._ticks += 1
+        if self.stats_every and self._ticks % self.stats_every == 0:
+            self.get_logger().info(self.filter.summary())
 
     # =========================================================
     # DESTROY NODE

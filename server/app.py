@@ -9,6 +9,7 @@ Endpoint:
     POST /expression   body = bytes gambar (jpg/png) -> {"detections":[{label,conf}], ...}
     POST /activity     body = bytes gambar (jpg/png) -> {"detections":[{cls,conf,x1,y1,x2,y2}], ...}
 """
+import hmac
 import os
 import threading
 import time
@@ -27,6 +28,7 @@ MODEL_PATHS = {
     "activity": os.environ.get("ACTIVITY_MODEL", os.path.join(_BASE, "best.onnx")),
 }
 CONF = {"expression": 0.5, "activity": 0.4}   # sama dengan node lokal
+API_TOKEN = os.environ.get("API_TOKEN", "")   # kosong = tanpa autentikasi (hanya untuk tes lokal)
 
 MODELS = {}
 LOCKS = {name: threading.Lock() for name in MODEL_PATHS}
@@ -65,7 +67,16 @@ def _decode(data: bytes):
     return img
 
 
+def _check_token(request: Request):
+    if not API_TOKEN:
+        return
+    given = request.headers.get("authorization", "")
+    if not hmac.compare_digest(given, f"Bearer {API_TOKEN}"):
+        raise HTTPException(401, "token tidak valid")
+
+
 async def _run(name, request: Request, fn):
+    _check_token(request)
     model = MODELS.get(name)
     if model is None:
         raise HTTPException(503, f"model '{name}' belum siap")
