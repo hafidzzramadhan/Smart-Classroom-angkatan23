@@ -20,8 +20,8 @@ import requests
 from ultralytics import YOLO
 
 p = argparse.ArgumentParser()
-p.add_argument("--kind", choices=["expression", "activity"], required=True)
-p.add_argument("--model", required=True)
+p.add_argument("--kind", choices=["expression", "activity", "recognition"], required=True)
+p.add_argument("--model", default="", help="tidak dipakai untuk recognition")
 p.add_argument("--url", default="http://127.0.0.1:8000")
 p.add_argument("--fmt", choices=["png", "jpg"], default="png")
 p.add_argument("--quality", type=int, default=90)
@@ -29,6 +29,32 @@ p.add_argument("--tol", type=float, default=0.01, help="toleransi selisih confid
 p.add_argument("--box-tol", type=int, default=2, help="toleransi selisih box (piksel)")
 p.add_argument("--images", nargs="+", required=True)
 a = p.parse_args()
+
+if a.kind == "recognition":
+    # Bandingkan encoding wajah lokal (dlib) vs server. Butuh face_recognition di mesin ini
+    # (kalau tidak ada, jalankan skrip ini di dalam container server).
+    import face_recognition
+    import numpy as np
+    files = sorted(f for pat in a.images for f in glob.glob(pat))
+    params = [int(cv2.IMWRITE_JPEG_QUALITY), a.quality] if a.fmt == "jpg" else []
+    token = os.environ.get("SMARTCLASS_API_TOKEN", "")
+    hdr = {"Authorization": f"Bearer {token}"} if token else {}
+    nbad = 0
+    for f in files:
+        img = cv2.imread(f)
+        local = face_recognition.face_encodings(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+        ok, buf = cv2.imencode("." + a.fmt, img, params)
+        d = requests.post(f"{a.url}/face_encoding", data=buf.tobytes(), headers=hdr,
+                          timeout=30).json()["detections"]
+        if len(local) != len(d):
+            status, diff = "LABEL", 0.0
+        else:
+            diff = max([float(np.max(np.abs(np.asarray(l) - np.asarray(r)))) for l, r in zip(local, d)] or [0.0])
+            status = "OK" if diff < a.tol else "GESER"
+        nbad += status == "LABEL"
+        print(f"{status:5s} {f} wajah_lokal={len(local)} wajah_server={len(d)} selisih_encoding_maks={diff:.6f}")
+    print(f"\n{len(files)} gambar ({a.fmt}), jumlah wajah beda: {nbad}")
+    sys.exit(1 if nbad else 0)
 
 conf = 0.5 if a.kind == "expression" else 0.4
 model = YOLO(a.model, task="detect") if a.model.endswith(".onnx") else YOLO(a.model)

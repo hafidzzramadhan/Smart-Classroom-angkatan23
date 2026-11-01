@@ -31,7 +31,7 @@ CONF = {"expression": 0.5, "activity": 0.4}   # sama dengan node lokal
 API_TOKEN = os.environ.get("API_TOKEN", "")   # kosong = tanpa autentikasi (hanya untuk tes lokal)
 
 MODELS = {}
-LOCKS = {name: threading.Lock() for name in MODEL_PATHS}
+LOCKS = {name: threading.Lock() for name in [*MODEL_PATHS, "recognition"]}
 
 
 def _load(path):
@@ -49,6 +49,15 @@ async def lifespan(app):
             print(f"[server] {name}: {path} siap")
         except Exception as e:  # server tetap hidup; endpoint terkait 503
             print(f"[server] GAGAL memuat {name} ({path}): {e}")
+
+    # Encoding wajah (dlib + face_recognition) -- opsional, hanya kalau terpasang
+    try:
+        import face_recognition
+        face_recognition.face_encodings(cv2.cvtColor(dummy, cv2.COLOR_BGR2RGB))  # warm-up
+        MODELS["recognition"] = face_recognition
+        print("[server] recognition: face_recognition siap")
+    except Exception as e:
+        print(f"[server] recognition tidak tersedia: {e}")
     yield
 
 
@@ -57,7 +66,7 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    return {"ok": True, "models": {k: (k in MODELS) for k in MODEL_PATHS}}
+    return {"ok": True, "models": {k: (k in MODELS) for k in [*MODEL_PATHS, "recognition"]}}
 
 
 def _decode(data: bytes):
@@ -125,3 +134,15 @@ async def expression(request: Request):
 @app.post("/activity")
 async def activity(request: Request):
     return await _run("activity", request, _activity)
+
+
+def _face_encoding(fr, img):
+    """Encoding 128-d per wajah pada crop (BGR -> RGB, sama dengan recognition_node lokal)."""
+    rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    return [e.tolist() for e in fr.face_encodings(rgb)]
+
+
+@app.post("/face_encoding")
+async def face_encoding(request: Request):
+    # "detections" berisi list encoding (tiap elemen = 128 angka), pencocokan dilakukan di klien
+    return await _run("recognition", request, _face_encoding)

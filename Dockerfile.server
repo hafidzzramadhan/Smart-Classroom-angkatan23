@@ -9,6 +9,16 @@ WORKDIR /app
 # torch versi CPU saja (server tidak punya GPU) supaya image tidak membengkak
 RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
 
+# Opsional: dukungan encoding wajah (dlib dikompilasi dari source: LAMA dan butuh RAM).
+#   docker build --build-arg WITH_RECOGNITION=1 ...
+ARG WITH_RECOGNITION=0
+RUN if [ "$WITH_RECOGNITION" = "1" ]; then \
+      apt-get update && apt-get install -y --no-install-recommends build-essential cmake && \
+      MAKEFLAGS=-j1 pip install --no-cache-dir "setuptools<81" wheel dlib face_recognition && \
+      apt-get purge -y build-essential cmake && apt-get autoremove -y && \
+      rm -rf /var/lib/apt/lists/*; \
+    fi
+
 COPY server/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
