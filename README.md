@@ -2,7 +2,7 @@
 
 **Smart Classroom Management System Berbasis Web dan Mobile untuk Monitoring Kehadiran, Jadwal, dan Aktivitas Perkuliahan**
 
-Proyek Capstone Informatika, Universitas Trisakti. Repositori ini memuat workspace ROS 2 untuk subsistem computer vision (CV), viewer lokal, serta instrumen dan data pengujian pendahuluan pada PC. Status dokumentasi: **24 Oktober 2026**.
+Proyek Capstone Informatika, Universitas Trisakti. Repositori ini memuat workspace ROS 2 untuk subsistem computer vision (CV), viewer lokal, serta instrumen dan data pengujian pada PC dan Raspberry Pi 5. Status dokumentasi: **3 November 2026**.
 
 Pengembangan menggunakan fondasi pipeline CV dan dashboard dari proyek angkatan sebelumnya. Pekerjaan yang telah dilaporkan kelompok mencakup verifikasi fungsi node, instrumentasi waktu callback, pengujian jalur keluaran lokal, dan diagnosis keterlambatan antartahap.
 
@@ -26,7 +26,7 @@ Pengembangan menggunakan fondasi pipeline CV dan dashboard dari proyek angkatan 
 | Dashboard web | Fondasi sebelumnya tersedia; verifikasi lokal dan integrasi baru belum dikonfirmasi dalam laporan ini. |
 | Aplikasi mobile dan fitur jadwal | Progres implementasi belum dikonfirmasi dalam laporan ini. |
 | Kehadiran | Pengenalan identitas pernah diuji; alur lengkap sampai pencatatan absensi belum terverifikasi. |
-| Raspberry Pi 5 | Pengujian belum dilakukan. Penyimpanan untuk deployment masih disiapkan. |
+| Raspberry Pi 5 | Pipeline wajah diuji dengan offload Expression dan Recognition ke API di PC melalui LAN. Median latensi hingga hasil Merge pertama teramati 3.819,883 ms. |
 | Buffer keluaran adaptif | Belum diimplementasikan dan belum diuji efektivitasnya. |
 
 Status “belum dikonfirmasi” menunjukkan keterbatasan laporan yang tersedia, bukan kepastian bahwa anggota tim belum mengerjakannya.
@@ -95,7 +95,7 @@ Ejaan `bondingbox` mengikuti nama pada source dan interface proyek.
 | Virtual environment | `/home/hafidz/smartclass_ws/.venv` |
 | Kamera PC | Hikvision DS-U02 |
 | Provider Activity yang tercatat | ONNX Runtime 1.30.0, `CPUExecutionProvider` |
-| Target perangkat | Raspberry Pi 5 RAM 8 GB, kamera JETE PTZ |
+| Perangkat uji | Raspberry Pi 5 RAM 8 GB, Ubuntu 24.04.5 LTS (ARM64), ROS 2 Jazzy |
 
 Model dan jalur file bergantung pada source masing-masing node. Contohnya, source Activity yang dipakai pada diagnosis memuat `models/best.onnx` melalui path absolut di workspace Hafidz. Nama file model saja tidak membuktikan bahwa dua node menggunakan model dan konfigurasi yang identik.
 
@@ -236,6 +236,24 @@ Pengamatan lain:
 - Pengamatan pada sesi lain memperoleh sekitar 24,3 pesan frame/detik. Kondisi sesi berbeda sehingga tidak diperlakukan sebagai perbandingan terkontrol.
 - Pilot Merge dengan Gesture mencatat 934 event dalam sekitar 30 detik. Jumlah event bukan jumlah gambar keluaran. Pengujian sampai viewer belum menghasilkan pengukuran end-to-end yang lengkap.
 
+## Uji Raspberry Pi 5 dengan API di PC
+
+Raspberry Pi menjalankan Frame, Face, Expression, Recognition, Merge, dan viewer. Face Detection berjalan di Pi. Node Expression dan Recognition mengirim crop wajah melalui LAN ke API yang berjalan di PC. Label ekspresi `sad` dan hasil identitas `Unknown` teramati pada topik ROS, dan hasil Merge tampil di viewer. Status `Unknown` menunjukkan jalur keluaran identitas menghasilkan pesan pada uji ini. Pencatatan absensi untuk wajah terdaftar belum diverifikasi dalam pengujian ini.
+
+- **Laju Frame di Pi** sekitar 9,927 Hz pada pengamatan terakhir (jendela 1.764 pesan). Jarak antarpesan 94–202 ms dengan simpangan baku 8,59 ms.
+- **Inferensi Face di Pi** tercatat pada 46 sampel dengan median 3.550,850 ms, P95 3.966,800 ms, dan maksimum 4.003,000 ms.
+
+### Latensi sampai hasil Merge
+
+Kedua pengukuran memakai `/cv/frame/result`. Latensi dihitung dari timestamp `frame_id` yang dibuat oleh node Frame sampai hasil pertama untuk frame tersebut diterima pencatat. Kolom latensi memakai satu sampel per frame unik, sedangkan laju pesan mencakup pesan berulang.
+
+| Konfigurasi | Durasi (s) | Pesan hasil | Frame unik | Pesan berulang | Pesan/s | Median (ms) | P95 (ms) | Maks. (ms) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Pipeline di PC, API di PC (loopback) | 180,148 | 264 | 141 | 123 | 1,465 | 2.556,275 | 3.532,136 | 4.635,088 |
+| Pipeline di Pi, API di PC (LAN) | 180,003 | 79 | 63 | 16 | 0,439 | 3.819,883 | 4.201,664 | 4.235,717 |
+
+Pada dua rekaman ini, median konfigurasi Pi lebih tinggi **1.263,608 ms (49,4%)** dan P95 lebih tinggi **669,528 ms**. Perbandingan ini mencakup perubahan perangkat dan jalur jaringan, sehingga kontribusi masing-masing belum bisa dipisahkan. Titik ukur berakhir saat pencatat menerima hasil pertama. Waktu tampil di viewer, kelengkapan hasil semua cabang, dan jumlah stalling belum diukur. Pengujian API melalui server kampus masih menunggu deployment.
+
 ## Diagnosis Detection ke Activity
 
 **Run:** `det_activity_link_20261019_213614_413169`  
@@ -294,9 +312,9 @@ Salinan `detection_publish1.csv` yang pernah digunakan sebelumnya memiliki presi
 | Kualitas gambar Merge menurun | Uji pengaruh kompresi JPEG dan pekerjaan tambahan Merge secara terpisah. |
 | Recognition pernah menghasilkan `Unknown` | Verifikasi data identitas, uji wajah dikenal, dan periksa alur absensi. |
 | Aplikasi web/mobile belum terverifikasi pada laporan ini | Jalankan fondasi dashboard dan petakan format data serta koneksi dengan backend. |
-| Deployment Raspberry Pi | Siapkan penyimpanan, cek dependensi/model, lalu uji Frame dan Detection sebelum menambah cabang. |
+| Deployment Raspberry Pi | Ulangi benchmark pipeline wajah dari Pi dengan API di server kampus dan catat latensi serta timeout. |
 
-Pengembangan dashboard dapat berjalan di PC selama perangkat Raspberry Pi disiapkan. Target integrasi awal adalah satu hasil CV yang benar-benar diterima aplikasi dan tampil pada dashboard, kemudian diperluas sesuai kebutuhan produk.
+Pengembangan dashboard dapat berjalan di PC secara terpisah dari benchmark pipeline wajah. Target integrasi awal adalah satu hasil CV yang benar-benar diterima aplikasi dan tampil pada dashboard, kemudian diperluas sesuai kebutuhan produk.
 
 ## Hubungan dengan Tugas Akhir
 
