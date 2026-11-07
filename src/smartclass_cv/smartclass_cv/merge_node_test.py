@@ -15,7 +15,10 @@ from std_msgs.msg import String
 from std_msgs.msg import Int64
 from cv_bridge import CvBridge
 from queue import Queue
-from collections import defaultdict, OrderedDict
+from collections import OrderedDict
+
+
+FACE_ANNOTATIONS = {'recognition', 'expression'}
 
 def maintain_box(box,initial):
         if initial is not None:
@@ -113,7 +116,7 @@ class BondingBoxMerger(Node):
         self.lastPublish.data = 0
         self.pub_status = "0"
         self.nframesample = 5
-        self.QBox = defaultdict(list)
+        self.QBox = {}
         # Engineering synchronization cache (NOT the TA dynamic playout buffer).
         # Temporary development limits; not research-derived values.
         self.frame_cache = OrderedDict()
@@ -161,9 +164,10 @@ class BondingBoxMerger(Node):
     def _publish_exact_fusion(self, seq):
         """Fuse AI result N only with image N; never with a newer live frame."""
         cached = self.frame_cache.get(seq)
-        bondings = self.QBox.get(str(seq))
-        if cached is None or not bondings:
+        annotations = self.QBox.get(str(seq))
+        if cached is None or not annotations:
             return False
+        bondings = list(annotations.values())
 
         arr = np.frombuffer(cached["jpeg"], dtype=np.uint8)
         cv_image = cv2.imdecode(arr, cv2.IMREAD_COLOR)
@@ -177,13 +181,7 @@ class BondingBoxMerger(Node):
         msg.frame_sequence = seq
         msg.frame_sampling = cached["frame_sampling"]
         msg.timestamp_pub = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        for box in bondings:
-            boxs = BondingBox()
-            boxs.label = box.label
-            boxs.confident_level = box.confident_level
-            boxs.name = box.name
-            boxs.bondingbox = box.bondingbox
-            msg.bondingboxs.append(boxs)
+        msg.bondingboxs = bondings
 
         ok, encoded = cv2.imencode('.jpg', cv_image, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
         if not ok:
@@ -197,7 +195,14 @@ class BondingBoxMerger(Node):
         self.pub_foxglove.publish(image_msg)
         self.pub_result.publish(msg)
         self.CurrentResult = msg
-        self.QBox.pop(str(seq), None)
+        # Keep earlier face boxes so the next crop from this frame can add its box.
+        face_annotations = {
+            key: box for key, box in annotations.items() if box.name in FACE_ANNOTATIONS
+        }
+        if face_annotations:
+            self.QBox[str(seq)] = face_annotations
+        else:
+            self.QBox.pop(str(seq), None)
         return True
 
     def stream_frame(self, stream):
@@ -226,13 +231,22 @@ class BondingBoxMerger(Node):
     def frame_callback(self, msg: FrameCv):
         # No unbounded frame FIFO.
         self._cache_frame(msg)
+        seq = int(msg.frame_sequence.data)
+        if str(seq) in self.QBox:
+            self._publish_exact_fusion(seq)
         # self.publish_live(msg)  # TEST: jangan timpa annotated frame dengan raw live frame
 
     def _store_ai_result(self, msg: BondingBoxCv, name: str):
-        msg.name = name
         seq = int(msg.frame_sequence.data)
         print(f'box frame {name}- {seq}')
-        self.QBox.setdefault(str(seq), []).append(msg)
+        box = BondingBox()
+        box.label = msg.label
+        box.confident_level = msg.confident_level
+        box.name = name
+        box.bondingbox = msg.bondingbox
+        # Face results have a crop ID. Other branches may reuse IDs in one frame.
+        key = (name, msg.bondingbox_id.data) if name in FACE_ANNOTATIONS else object()
+        self.QBox.setdefault(str(seq), {})[key] = box
         self.pub_status = "1"
         self._cap_qbox_size()
         if not self._publish_exact_fusion(seq):
