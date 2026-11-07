@@ -1,3 +1,5 @@
 *
 !server/app.py
 !server/requirements.txt
+!server/face_gallery.py
+!src/smartclass_cv/smartclass_cv/recognition_match.py

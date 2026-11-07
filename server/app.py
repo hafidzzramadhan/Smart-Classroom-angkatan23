@@ -11,6 +11,7 @@ Endpoint:
 """
 import hmac
 import os
+import sqlite3
 import threading
 import time
 from contextlib import asynccontextmanager
@@ -20,6 +21,11 @@ import numpy as np
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.concurrency import run_in_threadpool
 from ultralytics import YOLO
+
+if __package__:
+    from .face_gallery import load_gallery
+else:
+    from face_gallery import load_gallery
 
 _BASE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                      "..", "src", "smartclass_cv", "models")
@@ -58,6 +64,16 @@ async def lifespan(app):
         print("[server] recognition: face_recognition siap")
     except Exception as e:
         print(f"[server] recognition tidak tersedia: {e}")
+    app.state.face_gallery = None
+    gallery_path = os.environ.get("FACE_GALLERY_DB")
+    if gallery_path:
+        try:
+            from smartclass_cv.recognition_match import compare_faces_np, pick_name
+            app.state.face_gallery = load_gallery(gallery_path)
+            app.state.face_match = (compare_faces_np, pick_name)
+            print("[server] face gallery siap")
+        except (ImportError, OSError, ValueError, sqlite3.Error) as e:
+            print(f"[server] face gallery tidak tersedia: {e}")
     yield
 
 
@@ -66,7 +82,12 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    return {"ok": True, "models": {k: (k in MODELS) for k in [*MODEL_PATHS, "recognition"]}}
+    ready = {key: key in MODELS for key in [*MODEL_PATHS, "recognition"]}
+    ready["face_analysis"] = (
+        ready["expression"] and ready["recognition"]
+        and getattr(app.state, "face_gallery", None) is not None
+    )
+    return {"ok": True, "models": ready}
 
 
 def _decode(data: bytes):
@@ -146,3 +167,40 @@ def _face_encoding(fr, img):
 async def face_encoding(request: Request):
     # "detections" berisi list encoding (tiap elemen = 128 angka), pencocokan dilakukan di klien
     return await _run("recognition", request, _face_encoding)
+
+
+@app.post("/face_analysis")
+async def face_analysis(request: Request):
+    """Analyze a crop containing one face. Matching uses the server gallery."""
+    _check_token(request)
+    gallery = getattr(request.app.state, "face_gallery", None)
+    expression_model = MODELS.get("expression")
+    if gallery is None or expression_model is None:
+        raise HTTPException(503, "face analysis belum siap")
+    names, references = gallery
+    compare, choose_name = request.app.state.face_match
+
+    def analyze(recognition_model, image):
+        encodings = _face_encoding(recognition_model, image)
+        if len(encodings) != 1:
+            status = "no_face" if not encodings else "multiple_faces"
+            return {"status": status, "identity": None, "expression": None}
+
+        label = choose_name(compare(references, encodings[0]), names)
+        identity = None
+        if label != "Unknown":
+            name, separator, nim = label.partition("_")
+            identity = {"label": label, "name": name, "nim": nim if separator else None}
+
+        with LOCKS["expression"]:
+            expressions = _expression(expression_model, image)
+        expression = max(expressions, key=lambda item: item["conf"], default=None)
+        return {
+            "status": "matched" if identity else "unknown",
+            "identity": identity,
+            "expression": expression,
+        }
+
+    result = await _run("recognition", request, analyze)
+    analysis = result.pop("detections")
+    return {**analysis, **result}

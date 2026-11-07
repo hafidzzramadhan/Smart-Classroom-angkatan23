@@ -92,6 +92,9 @@ class BondingBoxMerger(Node):
         # subscriber recognition
         self.sub_recognition = self.create_subscription(BondingBoxCv, "/cv/bondingbox/face_identity", self.recognition_callback,10)
 
+        self.sub_face_analysis = self.create_subscription(
+            BondingBoxCv, "/cv/bondingbox/face_analysis", self.recognition_callback, 10)
+
         # subscriber emotion
         self.sub_emotion = self.create_subscription(BondingBoxCv, "/cv/bondingbox/face_emotion", self.emotion_callback,10)
         # subscriber activity

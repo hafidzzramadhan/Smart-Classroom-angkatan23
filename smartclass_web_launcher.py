@@ -63,11 +63,25 @@ def run(args, workspace, logs):
         process = processes.get(name)
         if process is not None and process.poll() is None:
             return None
+        recognition = processes.get("recognition")
+        expression = processes.get("expression")
+        if name == "expression" and (
+            mode == "server_match" or (
+                recognition is not None and recognition.poll() is None
+                and modes.get("recognition") == "server_match"
+            )
+        ):
+            return "Expression sudah ditangani oleh Recognition pada mode Server match."
+        if name == "recognition" and mode == "server_match" and (
+            expression is not None and expression.poll() is None
+        ):
+            return "Stop Expression sebelum menyalakan Recognition dalam mode Server match."
+
         command = commands[name].copy()
-        if name in offload_nodes and mode == "remote":
+        if name in offload_nodes and mode in {"remote", "server_match"}:
             if "--ros-args" not in command:
                 command.append("--ros-args")
-            command.extend(["-p", "mode:=remote", "-p", f"server_url:={server_url}",
+            command.extend(["-p", f"mode:={mode}", "-p", f"server_url:={server_url}",
                             "-p", "timeout_s:=10.0"])
         if not Path(command[0]).is_file():
             return f"{name}: file tidak ditemukan: {command[0]}"
@@ -136,7 +150,7 @@ def run(args, workspace, logs):
                 return
             path, _, mode = self.path.partition("?")
             mode = mode or default_mode
-            if mode not in {"local", "remote"}:
+            if mode not in {"local", "remote", "server_match"}:
                 self.send_error(400)
                 return
             parts = path.strip("/").split("/")
@@ -146,6 +160,8 @@ def run(args, workspace, logs):
             action, name = parts
             if name == "all":
                 targets = selected if action == "start" else reversed(commands)
+                if action == "start" and mode == "server_match":
+                    targets = [target for target in targets if target != "expression"]
             elif name in commands:
                 targets = [name]
             else:
@@ -202,8 +218,9 @@ pre{background:#0a1117;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;
 <label for="mode">Mode Expression &amp; Recognition</label>
 <select id="mode" data-default="__DEFAULT_MODE__">
 <option value="local">Stay on local</option><option value="remote">Offload to server</option>
+<option value="server_match">Server match (nama + ekspresi)</option>
 </select>
-<p><small>Untuk mengganti mode node yang aktif, klik Stop lalu Start lagi.</small></p>
+<p><small>Stop lalu Start untuk mengganti mode. Pada Server match, Recognition mengirim hasil nama dan ekspresi ke Merge.</small></p>
 <div class="toolbar"><button class="primary" id="start">Start semua</button><button id="stop">Stop semua</button></div>
 <p class="error" id="error" role="status"></p><div id="nodes"></div>
 <section hidden id="log-panel"><h2 id="log-title"></h2><pre id="log-output"></pre></section>
@@ -241,7 +258,8 @@ async function refresh() {
     row.status.className = node.running ? 'status active' : 'status';
     row.status.textContent = node.running ? 'Aktif · PID ' + node.pid :
       node.pid ? 'Berhenti · exit ' + node.code : 'Belum dijalankan';
-    if (node.mode) row.status.textContent += node.mode === 'remote' ? ' · Offload' : ' · Local';
+    const modeNames = {local: 'Local', remote: 'Offload', server_match: 'Server match'};
+    if (node.mode) row.status.textContent += ' · ' + modeNames[node.mode];
     if (!node.included) row.status.textContent += ' · Opsional';
     row.start.disabled = node.running;
     row.stop.disabled = !node.running;

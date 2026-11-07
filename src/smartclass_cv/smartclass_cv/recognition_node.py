@@ -24,8 +24,8 @@ class FaceRecognition(Node):
         # mode 'local'  -> face_recognition (dlib) dijalankan di node ini (perilaku lama)
         # mode 'remote' -> hanya penghitungan ENCODING wajah (bagian berat) dikirim ke server.
         #                  Pencocokan dengan encodings.pickle dan penulisan absensi
-        #                  (SQLite) TETAP di node ini, jadi data biometrik tidak
-        #                  meninggalkan perangkat.
+        #                  (SQLite) tetap dilakukan di node ini.
+        # mode 'server_match' -> server mencocokkan wajah dan menilai ekspresi.
         self.declare_parameter('mode', 'local')
         self.declare_parameter('server_url', 'http://127.0.0.1:8000')
         self.declare_parameter('timeout_s', 2.0)
@@ -37,26 +37,32 @@ class FaceRecognition(Node):
         self.declare_parameter('work_dir', '')
 
         self.mode = self.get_parameter('mode').value
-        if self.mode not in ('local', 'remote'):
-            raise ValueError("parameter 'mode' harus 'local' atau 'remote'")
+        if self.mode not in ('local', 'remote', 'server_match'):
+            raise ValueError("mode harus local, remote, atau server_match")
         self.tolerance = float(self.get_parameter('tolerance').value)
 
-        # --- KONFIGURASI PATH ---
-        work_dir = self.get_parameter('work_dir').value or os.path.expanduser(
-            "~/smartclass_ws/src/smartclass_cv/face_registered")
-        self.work_dir = work_dir
-        self.pickle_path = os.path.join(self.work_dir, "encodings.pickle")
-        self.db_path = os.path.join(self.work_dir, "absensi.db")
+        if self.mode != 'server_match':
+            # --- KONFIGURASI PATH ---
+            work_dir = self.get_parameter('work_dir').value or os.path.expanduser(
+                "~/smartclass_ws/src/smartclass_cv/face_registered")
+            self.work_dir = work_dir
+            self.pickle_path = os.path.join(self.work_dir, "encodings.pickle")
+            self.db_path = os.path.join(self.work_dir, "absensi.db")
 
-        # Load data wajah terdaftar
-        self.data = pickle.loads(open(self.pickle_path, "rb").read())
+            with open(self.pickle_path, "rb") as source:
+                self.data = pickle.load(source)
+
+            self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
+            self.cursor = self.conn.cursor()
+            self.absen_hari_ini = set()
 
         # Model / klien
         if self.mode == 'local':
             import face_recognition  # hanya dibutuhkan di mode local (butuh dlib)
             self.fr = face_recognition
         else:
-            url = self.get_parameter('server_url').value.rstrip('/') + '/face_encoding'
+            endpoint = '/face_analysis' if self.mode == 'server_match' else '/face_encoding'
+            url = self.get_parameter('server_url').value.rstrip('/') + endpoint
             self.remote = RemoteModel(
                 url,
                 timeout=self.get_parameter('timeout_s').value,
@@ -66,14 +72,13 @@ class FaceRecognition(Node):
             self.stats = RttStats(self.get_logger(), 'recognition')
             self.get_logger().info(f"🌐 Remote encoding: {url}")
 
-        # Setup DB
-        self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
-        self.cursor = self.conn.cursor()
-        self.absen_hari_ini = set()
-
         # ROS Communications
         self.sub = self.create_subscription(BondingBoxCv, '/cv/bondingbox/face', self.listener_callback, 10)
-        self.pub = self.create_publisher(BondingBoxCv, '/cv/bondingbox/face_identity', 10)
+        topic = (
+            '/cv/bondingbox/face_analysis' if self.mode == 'server_match'
+            else '/cv/bondingbox/face_identity'
+        )
+        self.pub = self.create_publisher(BondingBoxCv, topic, 10)
         self.br = CvBridge()
         self.get_logger().info(
             f"SERVER READY (mode={self.mode}): Menunggu gambar dari face detection...")
@@ -101,10 +106,34 @@ class FaceRecognition(Node):
                 self.data["encodings"], encoding, tolerance=self.tolerance)
         return compare_faces_np(self.data["encodings"], encoding, self.tolerance)
 
+    def _publish_server_analysis(self, msg, frame):
+        try:
+            result = self.remote.infer(frame)
+        except RemoteError as error:
+            self.stats.add_fail(error)
+            return
+        self.stats.add(result)
+        if result["status"] in ("no_face", "multiple_faces"):
+            return
+
+        identity = result["identity"]
+        msg.label = identity["name"] if identity else "Unknown"
+        expression = result["expression"]
+        msg.confident_level = 0.0
+        if expression is not None:
+            msg.label += f" | {expression['label']}"
+            msg.confident_level = round(float(expression["conf"]), 2)
+        msg.timestamp = datetime.now().strftime("%H:%M:%S")
+        self.pub.publish(msg)
+
     def listener_callback(self, msg: BondingBoxCv):
         try:
             # 1. Convert Image
             frame = self.br.imgmsg_to_cv2(msg.cropped_image)
+
+            if self.mode == 'server_match':
+                self._publish_server_analysis(msg, frame)
+                return
 
             # 2. Face Recognition
             if self.mode == 'local':
