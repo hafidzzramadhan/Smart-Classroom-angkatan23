@@ -22,7 +22,7 @@ RUN if [ "$WITH_RECOGNITION" = "1" ]; then \
 COPY server/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY server/app.py server/face_gallery.py ./
+COPY server/app.py server/face_gallery.py server/enroll_face.py ./
 COPY src/smartclass_cv/smartclass_cv/recognition_match.py smartclass_cv/
 
 # Model TIDAK ada di image; dipasang sebagai volume read-only di /models
