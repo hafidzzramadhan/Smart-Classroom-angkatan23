@@ -1,4 +1,6 @@
 import os
+import base64
+import requests
 import pickle
 import sqlite3
 from datetime import datetime
@@ -37,11 +39,11 @@ class FaceRecognition(Node):
         self.declare_parameter('work_dir', '')
 
         self.mode = self.get_parameter('mode').value
-        if self.mode not in ('local', 'remote', 'server_match'):
+        if self.mode not in ('local', 'remote', 'server_match', 'fikri_api'):
             raise ValueError("mode harus local, remote, atau server_match")
         self.tolerance = float(self.get_parameter('tolerance').value)
 
-        if self.mode != 'server_match':
+        if self.mode not in ('server_match', 'fikri_api'):
             # --- KONFIGURASI PATH ---
             work_dir = self.get_parameter('work_dir').value or os.path.expanduser(
                 "~/smartclass_ws/src/smartclass_cv/face_registered")
@@ -60,6 +62,12 @@ class FaceRecognition(Node):
         if self.mode == 'local':
             import face_recognition  # hanya dibutuhkan di mode local (butuh dlib)
             self.fr = face_recognition
+        elif self.mode == 'fikri_api':
+            self.fikri_url = (
+                self.get_parameter('server_url').value.rstrip('/')
+                + '/api/recognize-test/'
+            )
+            self.get_logger().info(f"Fikri API: {self.fikri_url}")
         else:
             endpoint = '/face_analysis' if self.mode == 'server_match' else '/face_encoding'
             url = self.get_parameter('server_url').value.rstrip('/') + endpoint
@@ -75,7 +83,7 @@ class FaceRecognition(Node):
         # ROS Communications
         self.sub = self.create_subscription(BondingBoxCv, '/cv/bondingbox/face', self.listener_callback, 10)
         topic = (
-            '/cv/bondingbox/face_analysis' if self.mode == 'server_match'
+            '/cv/bondingbox/face_analysis' if self.mode in ('server_match', 'fikri_api')
             else '/cv/bondingbox/face_identity'
         )
         self.pub = self.create_publisher(BondingBoxCv, topic, 10)
@@ -126,10 +134,55 @@ class FaceRecognition(Node):
         msg.timestamp = datetime.now().strftime("%H:%M:%S")
         self.pub.publish(msg)
 
+
+    def _publish_fikri_analysis(self, msg, frame):
+        try:
+            ok, encoded = cv2.imencode(".jpg", frame)
+            if not ok:
+                self.get_logger().error("Gagal encode crop wajah")
+                return
+
+            image_base64 = base64.b64encode(
+                encoded.tobytes()
+            ).decode("utf-8")
+
+            response = requests.post(
+                self.fikri_url,
+                json={"image": image_base64},
+                timeout=float(self.get_parameter('timeout_s').value)
+            )
+            response.raise_for_status()
+            result = response.json()
+
+            name = (
+                result.get("student_name")
+                if result.get("success")
+                else None
+            )
+            msg.label = name or "Unknown"
+
+            expression = result.get("expression")
+            if isinstance(expression, dict):
+                expression = expression.get("label")
+            if expression:
+                msg.label += f" | {expression}"
+
+            msg.confident_level = 0.0
+            msg.timestamp = datetime.now().strftime("%H:%M:%S")
+            self.pub.publish(msg)
+            self.get_logger().info(f"Fikri API: {msg.label}")
+
+        except (requests.RequestException, ValueError) as error:
+            self.get_logger().error(f"Fikri API gagal: {error}")
+
     def listener_callback(self, msg: BondingBoxCv):
         try:
             # 1. Convert Image
             frame = self.br.imgmsg_to_cv2(msg.cropped_image)
+
+            if self.mode == 'fikri_api':
+                self._publish_fikri_analysis(msg, frame)
+                return
 
             if self.mode == 'server_match':
                 self._publish_server_analysis(msg, frame)

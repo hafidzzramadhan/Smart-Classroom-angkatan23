@@ -66,19 +66,19 @@ def run(args, workspace, logs):
         recognition = processes.get("recognition")
         expression = processes.get("expression")
         if name == "expression" and (
-            mode == "server_match" or (
+            mode in {"server_match", "fikri_api"} or (
                 recognition is not None and recognition.poll() is None
-                and modes.get("recognition") == "server_match"
+                and modes.get("recognition") in {"server_match", "fikri_api"}
             )
         ):
             return "Expression sudah ditangani oleh Recognition pada mode Server match."
-        if name == "recognition" and mode == "server_match" and (
+        if name == "recognition" and mode in {"server_match", "fikri_api"} and (
             expression is not None and expression.poll() is None
         ):
             return "Stop Expression sebelum menyalakan Recognition dalam mode Server match."
 
         command = commands[name].copy()
-        if name in offload_nodes and mode in {"remote", "server_match"}:
+        if name in offload_nodes and mode in {"remote", "server_match", "fikri_api"}:
             if "--ros-args" not in command:
                 command.append("--ros-args")
             command.extend(["-p", f"mode:={mode}", "-p", f"server_url:={server_url}",
@@ -150,7 +150,7 @@ def run(args, workspace, logs):
                 return
             path, _, mode = self.path.partition("?")
             mode = mode or default_mode
-            if mode not in {"local", "remote", "server_match"}:
+            if mode not in {"local", "remote", "server_match", "fikri_api"}:
                 self.send_error(400)
                 return
             parts = path.strip("/").split("/")
@@ -160,7 +160,7 @@ def run(args, workspace, logs):
             action, name = parts
             if name == "all":
                 targets = selected if action == "start" else reversed(commands)
-                if action == "start" and mode == "server_match":
+                if action == "start" and mode in {"server_match", "fikri_api"}:
                     targets = [target for target in targets if target != "expression"]
             elif name in commands:
                 targets = [name]
@@ -219,6 +219,7 @@ pre{background:#0a1117;padding:16px;white-space:pre-wrap;overflow-wrap:anywhere;
 <select id="mode" data-default="__DEFAULT_MODE__">
 <option value="local">Stay on local</option><option value="remote">Offload to server</option>
 <option value="server_match">Server match (nama + ekspresi)</option>
+<option value="fikri_api">Fikri API (Recognition baru)</option>
 </select>
 <p><small>Stop lalu Start untuk mengganti mode. Pada Server match, Recognition mengirim hasil nama dan ekspresi ke Merge.</small></p>
 <div class="toolbar"><button class="primary" id="start">Start semua</button><button id="stop">Stop semua</button></div>
@@ -258,7 +259,7 @@ async function refresh() {
     row.status.className = node.running ? 'status active' : 'status';
     row.status.textContent = node.running ? 'Aktif · PID ' + node.pid :
       node.pid ? 'Berhenti · exit ' + node.code : 'Belum dijalankan';
-    const modeNames = {local: 'Local', remote: 'Offload', server_match: 'Server match'};
+    const modeNames = {local: 'Local', remote: 'Offload', server_match: 'Server match', fikri_api: 'Fikri API'};
     if (node.mode) row.status.textContent += ' · ' + modeNames[node.mode];
     if (!node.included) row.status.textContent += ' · Opsional';
     row.start.disabled = node.running;
