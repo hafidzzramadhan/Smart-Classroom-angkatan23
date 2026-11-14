@@ -7,6 +7,8 @@ from smartclass_msgs.msg import BondingBox
 from smartclass_msgs.msg import FrameCv
 from smartclass_msgs.msg import ResultCv
 import datetime
+import copy
+import time
 import cv2
 import numpy as np
 import base64
@@ -49,19 +51,16 @@ def draw_box_label(cv_image,bondingboxs):
             y = int(box.bondingbox.center.position.y - h/2)
 
             color = colors[box.name]
-            print(f"DRAW_BOX name={box.name} label={box.label} x={x} y={y} w={w} h={h} image={cv_image.shape}")
+            # Debug logging disabled
             cv2.rectangle(cv_image, (x, y), (x + w, y + h), color, 10)
-            print(f"AFTER_DRAW pixel={cv_image[y, x].tolist()} expected_color={list(color)}")
+            # Debug logging disabled
             # Add label (text)
             if box.label == None:
                 box.label = "Unknown"
 
             cv2.putText(cv_image, box.label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
-        save_image(cv_image,"None")
+        # Disk write disabled for live video performance
 
-
-    _, buffer = cv2.imencode('.jpg', cv_image)
-    jpg_as_base64 = base64.b64encode(buffer).decode('utf-8')
 
     return cv_image
 
@@ -92,6 +91,14 @@ class BondingBoxMerger(Node):
         # subscriber frame
         self.sub_frame = self.create_subscription(FrameCv, "/cv/frame",self.frame_callback,10)
 
+        # Koordinat wajah terbaru langsung dari YOLO
+        self.sub_face_detection = self.create_subscription(
+            BondingBoxCv,
+            "/cv/bondingbox/face",
+            self.face_detection_callback,
+            10
+        )
+
         # subscriber recognition
         self.sub_recognition = self.create_subscription(BondingBoxCv, "/cv/bondingbox/face_identity", self.recognition_callback,10)
 
@@ -117,6 +124,21 @@ class BondingBoxMerger(Node):
         self.pub_status = "0"
         self.nframesample = 5
         self.QBox = {}
+        self.latest_overlay_seq = -1
+        self.latest_overlay_time = 0.0
+        self.latest_overlay = []
+        self.latest_detection_seq = -1
+        self.latest_detections = []
+        self.latest_detection_time = 0.0
+
+        # BYTETRACK_ID_OVERLAY_V1
+        self.track_labels = {}
+        self.track_last_seen = {}
+        self.track_label_ttl = 2.0
+        self.track_detection_ttl = 2.0
+        self.track_reuse_gap = 1.0
+
+        self.overlay_max_age = 12
         # Engineering synchronization cache (NOT the TA dynamic playout buffer).
         # Temporary development limits; not research-derived values.
         self.frame_cache = OrderedDict()
@@ -192,7 +214,6 @@ class BondingBoxMerger(Node):
         image_msg.header.stamp = self.get_clock().now().to_msg()
         image_msg.format = 'jpeg'
         image_msg.data = encoded.tobytes()
-        self.pub_foxglove.publish(image_msg)
         self.pub_result.publish(msg)
         self.CurrentResult = msg
         # Keep earlier face boxes so the next crop from this frame can add its box.
@@ -215,15 +236,27 @@ class BondingBoxMerger(Node):
         print(f'stream latest = {latest_stream.data}')
 
     def publish_live(self, frames):
-        """Publish current live image without borrowing annotations from another frame."""
-        cv_image = self.bridge.imgmsg_to_cv2(frames.frame_image, desired_encoding='bgr8')
-        ok, encoded = cv2.imencode('.jpg', cv_image, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-        if ok:
-            image_msg = CompressedImage()
-            image_msg.header.stamp = self.get_clock().now().to_msg()
-            image_msg.format = 'jpeg'
-            image_msg.data = encoded.tobytes()
-            self.pub_foxglove.publish(image_msg)
+        """Publish live video independently of AI completion."""
+        seq = int(frames.frame_sequence.data)
+        cv_image = self.bridge.imgmsg_to_cv2(
+            frames.frame_image, desired_encoding='bgr8'
+        )
+
+        tracked = self._tracked_overlay()
+        if tracked:
+            cv_image = draw_box_label(cv_image, tracked)
+
+        ok, encoded = cv2.imencode(
+            '.jpg', cv_image, [int(cv2.IMWRITE_JPEG_QUALITY), 85]
+        )
+        if not ok:
+            return
+
+        image_msg = CompressedImage()
+        image_msg.header.stamp = self.get_clock().now().to_msg()
+        image_msg.format = 'jpeg'
+        image_msg.data = encoded.tobytes()
+        self.pub_foxglove.publish(image_msg)
 
     def stream_callback(self, msg: Int64):
         self.stream_frame(msg)
@@ -234,7 +267,7 @@ class BondingBoxMerger(Node):
         seq = int(msg.frame_sequence.data)
         if str(seq) in self.QBox:
             self._publish_exact_fusion(seq)
-        # self.publish_live(msg)  # TEST: jangan timpa annotated frame dengan raw live frame
+        self.publish_live(msg)
 
     def _store_ai_result(self, msg: BondingBoxCv, name: str):
         seq = int(msg.frame_sequence.data)
@@ -249,8 +282,98 @@ class BondingBoxMerger(Node):
         self.QBox.setdefault(str(seq), {})[key] = box
         self.pub_status = "1"
         self._cap_qbox_size()
+
+        if name in FACE_ANNOTATIONS:
+            tid = int(msg.bondingbox_id.data)
+            now = time.monotonic()
+
+            # Jangan terima respons lama untuk track yang
+            # sudah lama hilang atau sudah digunakan ulang.
+            last_seen = self.track_last_seen.get(tid)
+
+            if (
+                last_seen is not None
+                and seq <= last_seen["seq"]
+                and now - last_seen["time"] <= self.track_reuse_gap
+            ):
+                previous = self.track_labels.get(tid)
+
+                if previous is None or seq >= previous["seq"]:
+                    self.track_labels[tid] = {
+                        "label": str(msg.label or "Unknown"),
+                        "seq": seq,
+                        "time": now,
+                    }
+
+        if seq >= self.latest_overlay_seq:
+            self.latest_overlay_seq = seq
+            self.latest_overlay = list(self.QBox[str(seq)].values())
+            self.latest_overlay_time = time.monotonic()
         if not self._publish_exact_fusion(seq):
             print(f'waiting exact frame - {seq}')
+
+    def face_detection_callback(self, msg: BondingBoxCv):
+        """Simpan koordinat YOLO berdasarkan ByteTrack ID."""
+        seq = int(msg.frame_sequence.data)
+        tid = int(msg.bondingbox_id.data)
+        now = time.monotonic()
+
+        if seq < self.latest_detection_seq:
+            return
+
+        if seq > self.latest_detection_seq:
+            self.latest_detection_seq = seq
+            self.latest_detections = {}
+
+        previous = self.track_last_seen.get(tid)
+
+        # Track lama yang muncul kembali setelah jeda
+        # tidak boleh langsung mewarisi label lama.
+        if (
+            previous is not None
+            and now - previous["time"] > self.track_reuse_gap
+        ):
+            self.track_labels.pop(tid, None)
+
+        self.latest_detections[tid] = copy.deepcopy(msg.bondingbox)
+        self.track_last_seen[tid] = {
+            "seq": seq,
+            "time": now,
+        }
+        self.latest_detection_time = now
+
+    def _tracked_overlay(self):
+        """Gambar posisi terbaru dan label milik track ID."""
+        now = time.monotonic()
+
+        if now - self.latest_detection_time > self.track_detection_ttl:
+            return []
+
+        overlays = []
+
+        for tid, bbox in self.latest_detections.items():
+            seen = self.track_last_seen.get(tid)
+
+            if seen is None:
+                continue
+
+            if now - seen["time"] > self.track_detection_ttl:
+                continue
+
+            item = self.track_labels.get(tid)
+            label = f"Tracking ID {tid}"
+
+            if item is not None:
+                if now - item["time"] <= self.track_label_ttl:
+                    label = item["label"]
+
+            box = BondingBox()
+            box.name = "recognition"
+            box.label = label
+            box.bondingbox = copy.deepcopy(bbox)
+            overlays.append(box)
+
+        return overlays
 
     def recognition_callback(self, msg: BondingBoxCv):
         self._store_ai_result(msg, "recognition")

@@ -59,13 +59,16 @@ class FaceNode(Node):
                 frame = self.br.imgmsg_to_cv2(msg.frame_image, desired_encoding='bgr8')
                  
                 # 2. YOLO face Inference
-                results = self.model(frame)
+                results = self.model.track(frame, persist=True, tracker="bytetrack.yaml", verbose=False)
                 for result in results:
                     # Get detections as a pandas DataFrame
                     detections = result.boxes.xyxy  # Bounding boxes in [x1, y1, x2, y2] format
                     confidences = result.boxes.conf  # Confidence scores
                     class_ids = result.boxes.cls     # Class IDs
-                    bondingboxid = 1
+                    track_ids = result.boxes.id
+                    if track_ids is None:
+                        continue
+                    track_ids = track_ids.int().cpu().tolist()
                     # Convert to numpy for OpenCV
                     bboxes = detections.cpu().numpy() if hasattr(detections, "cpu") else detections
                     for i, bbox in enumerate(bboxes):
@@ -75,7 +78,7 @@ class FaceNode(Node):
 
                         # 3. Crop the image using bounding box coordinates
                         cropped_image = frame[y1:y2, x1:x2]  # Crop the image
-                        filename = f"/home/agung/ros2_ws/saved_detected_person/face/frame_{timestamp}_{bondingboxid}.png"
+                        filename = f"/home/agung/ros2_ws/saved_detected_person/face/frame_{timestamp}_{int(track_ids[i])}.png"
                         #self.save_image(cropped_image,filename)
                         
                         # Convert cropped image to ROS Image
@@ -87,14 +90,14 @@ class FaceNode(Node):
                         cropped_msg.frame_id =  msg.frame_id
                         cropped_msg.frame_sampling = msg.frame_sampling
                         cropped_msg.frame_sequence.data = msg.frame_sequence.data 
-                        cropped_msg.bondingbox_id.data = bondingboxid
+                        cropped_msg.bondingbox_id.data = int(track_ids[i])
                         cropped_msg.cropped_image = cropped_ros_image  # Assigning cropped image to message
                         cropped_msg.bondingbox = self.bondingbox2d(x1,y1,x2,y2)
                         cropped_msg.timestamp = timestamp  # Adding timestamp to the message
 
                         # Publish the message
                         self.pub.publish(cropped_msg)
-                        bondingboxid += 1
+                        # Persistent tracking ID replaces per-frame counter
 
         except Exception as e:
             self.get_logger().error(f"❌ Error: {e}")

@@ -68,7 +68,7 @@ class FaceRecognition(Node):
         elif self.mode == 'fikri_api':
             self.fikri_url = (
                 self.get_parameter('server_url').value.rstrip('/')
-                + '/api/recognize-test/'
+                + '/api/expression-test/'
             )
             self.get_logger().info(f"Fikri API: {self.fikri_url}")
         else:
@@ -200,13 +200,29 @@ class FaceRecognition(Node):
             )
             msg.label = name or "Unknown"
 
-            expression = result.get("expression")
-            if isinstance(expression, dict):
-                expression = expression.get("label")
-            if expression:
-                msg.label += f" | {expression}"
+            expression = result.get("expression_label")
+            confidence = result.get("expression_conf")
+            # Fallback for older API response formats.
+            if expression is None:
+                old_expression = result.get("expression")
+                if isinstance(old_expression, dict):
+                    expression = old_expression.get("label")
+                    if confidence is None:
+                        confidence = old_expression.get("conf")
+                elif isinstance(old_expression, str):
+                    expression = old_expression
 
             msg.confident_level = 0.0
+            if confidence is not None:
+                try:
+                    msg.confident_level = float(confidence)
+                except (TypeError, ValueError):
+                    pass
+            if expression:
+                if confidence is not None and isinstance(confidence, (int, float)):
+                    msg.label += f" | {expression} ({float(confidence):.2f})"
+                else:
+                    msg.label += f" | {expression}"
             msg.timestamp = datetime.now().strftime("%H:%M:%S")
             self.pub.publish(msg)
             self.get_logger().info(f"Fikri API: {msg.label}")
