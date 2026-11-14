@@ -4,6 +4,9 @@ import requests
 import pickle
 import sqlite3
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
+from threading import BoundedSemaphore, Lock
+from time import monotonic
 
 import cv2
 import rclpy
@@ -88,6 +91,14 @@ class FaceRecognition(Node):
         )
         self.pub = self.create_publisher(BondingBoxCv, topic, 10)
         self.br = CvBridge()
+        # Fikri API: 2 HTTP workers; at most 6 crops outstanding (running + queued).
+        # ROS callback never waits for the network.
+        if self.mode == 'fikri_api':
+            self._fikri_pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix='fikri')
+            self._fikri_slots = BoundedSemaphore(6)
+            self._fikri_lock = Lock()
+            self._fikri_latest_seq = -1
+            self._fikri_dropped = 0
         self.get_logger().info(
             f"SERVER READY (mode={self.mode}): Menunggu gambar dari face detection...")
 
@@ -135,6 +146,34 @@ class FaceRecognition(Node):
         self.pub.publish(msg)
 
 
+    def _submit_fikri(self, msg, frame):
+        """Bounded async HTTP: never stall the ROS subscription callback."""
+        seq = int(msg.frame_sequence.data)
+        with self._fikri_lock:
+            self._fikri_latest_seq = max(self._fikri_latest_seq, seq)
+        if not self._fikri_slots.acquire(blocking=False):
+            self._fikri_dropped += 1
+            if self._fikri_dropped % 50 == 1:
+                self.get_logger().warning(
+                    f'Fikri overload: {self._fikri_dropped} crops skipped (bounded queue)')
+            return
+        try:
+            self._fikri_pool.submit(self._fikri_worker, msg, frame, seq)
+        except RuntimeError:
+            self._fikri_slots.release()
+
+    def _fikri_worker(self, msg, frame, seq):
+        try:
+            # Skip queued jobs once newer frames have arrived.
+            # Keep a 12-frame window so multiple faces in a frame can finish.
+            with self._fikri_lock:
+                latest = self._fikri_latest_seq
+            if seq < latest - 12:
+                return
+            self._publish_fikri_analysis(msg, frame)
+        finally:
+            self._fikri_slots.release()
+
     def _publish_fikri_analysis(self, msg, frame):
         try:
             ok, encoded = cv2.imencode(".jpg", frame)
@@ -175,13 +214,18 @@ class FaceRecognition(Node):
         except (requests.RequestException, ValueError) as error:
             self.get_logger().error(f"Fikri API gagal: {error}")
 
+    def destroy_node(self):
+        if self.mode == 'fikri_api':
+            self._fikri_pool.shutdown(wait=True, cancel_futures=True)
+        return super().destroy_node()
+
     def listener_callback(self, msg: BondingBoxCv):
         try:
             # 1. Convert Image
             frame = self.br.imgmsg_to_cv2(msg.cropped_image)
 
             if self.mode == 'fikri_api':
-                self._publish_fikri_analysis(msg, frame)
+                self._submit_fikri(msg, frame)
                 return
 
             if self.mode == 'server_match':
