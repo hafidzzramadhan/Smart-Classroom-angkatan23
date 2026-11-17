@@ -111,11 +111,14 @@ class DetectionNodeInstrumented(Node):
                 msg_pub.cropped_image = self.bridge.cv2_to_imgmsg(croppedimage, encoding="bgr8")
                 msg_pub.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
-                if box["label"] == 'person':
+                label_lower = box["label"].strip().lower()
+                if label_lower == 'person':
                     msg_pub.label = 'Person'
+                    msg_pub.confident_level = box["confidence"]
                     self.pub_person.publish(msg_pub)
-                elif box["label"] == 'chair':
+                elif label_lower == 'chair':
                     msg_pub.label = 'Chair'
+                    msg_pub.confident_level = box["confidence"]
                     self.pub_nonperson.publish(msg_pub)
 
                 bondingid += 1

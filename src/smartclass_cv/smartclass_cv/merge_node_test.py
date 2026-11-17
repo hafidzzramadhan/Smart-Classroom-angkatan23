@@ -42,25 +42,33 @@ def maintain_box(box,initial):
 def draw_box_label(cv_image,bondingboxs):
 
     if bondingboxs != None:
-        colors = {"recognition":(0, 255, 0), "expression":(255, 0, 0),"gesture":(0, 0, 255),"activity":(255,255,0),"Unknown":(0,255,200)}
-        # Colors for the boxes (Green, Red, Blue)
+        # [PERSON PATCH] tambah warna "person" (magenta)
+        colors = {"recognition":(0, 255, 0), "expression":(255, 0, 0),"gesture":(0, 0, 255),"activity":(255,255,0),"Unknown":(0,255,200),"person":(255, 0, 255)}
         for box in bondingboxs:
             w = int(box.bondingbox.size_x)
             h = int(box.bondingbox.size_y)
             x = int(box.bondingbox.center.position.x - w/2)
             y = int(box.bondingbox.center.position.y - h/2)
 
-            color = colors[box.name]
-            # Debug logging disabled
-            cv2.rectangle(cv_image, (x, y), (x + w, y + h), color, 10)
-            # Debug logging disabled
-            # Add label (text)
+            # [PERSON PATCH] pencarian warna aman (tidak KeyError) + garis person lebih tipis
+            color = colors.get(box.name, (255, 255, 255))
+            if box.name == "person":
+                thickness = 4
+            elif box.name in ("activity", "gesture"):
+                thickness = 2
+            else:
+                thickness = 10
+            cv2.rectangle(cv_image, (x, y), (x + w, y + h), color, thickness)
+
             if box.label == None:
                 box.label = "Unknown"
 
-            cv2.putText(cv_image, box.label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
-        # Disk write disabled for live video performance
-
+            # activity/gesture: teks di dalam kotak agar tidak menimpa label "Person"
+            if box.name in ("activity", "gesture"):
+                text_pos = (x + 6, y + 30)
+            else:
+                text_pos = (x, y - 10)
+            cv2.putText(cv_image, box.label, text_pos, cv2.FONT_HERSHEY_SIMPLEX, 0.9, color, 2)
 
     return cv_image
 
@@ -113,6 +121,10 @@ class BondingBoxMerger(Node):
         # subscriber gesture
         self.sub_gesture = self.create_subscription(BondingBoxCv, "/cv/bondingbox/gesture", self.gesture_callback,10)
 
+        # [PERSON PATCH] subscriber person (dari DetectionNode)
+        self.sub_person = self.create_subscription(
+            BondingBoxCv, "/cv/bondingbox/person", self.person_callback, 10)
+
         # publish all
         self.pub_foxglove = self.create_publisher(CompressedImage, "/cv/frame/image",10)
         self.pub_result = self.create_publisher(ResultCv, "/cv/frame/result",10)
@@ -130,6 +142,19 @@ class BondingBoxMerger(Node):
         self.latest_detection_seq = -1
         self.latest_detections = []
         self.latest_detection_time = 0.0
+
+        # [PERSON PATCH] state kotak person
+        self.latest_person_seq = -1
+        self.latest_persons = []
+        self.latest_person_time = 0.0
+        self.person_ttl = 1.5  # detik; kotak person hilang jika tidak ada deteksi baru
+
+        # [ACTIVITY PATCH] kotak activity & gesture untuk video live
+        self.latest_extra = {
+            "activity": {"seq": -1, "time": 0.0, "boxes": []},
+            "gesture": {"seq": -1, "time": 0.0, "boxes": []},
+        }
+        self.extra_ttl = 1.5
 
         # BYTETRACK_ID_OVERLAY_V1
         self.track_labels = {}
@@ -242,9 +267,11 @@ class BondingBoxMerger(Node):
             frames.frame_image, desired_encoding='bgr8'
         )
 
-        tracked = self._tracked_overlay()
-        if tracked:
-            cv_image = draw_box_label(cv_image, tracked)
+        # [PERSON PATCH] person digambar dulu, wajah di atasnya
+        overlay = self._merged_person_extra()  # person + activity/gesture digabung
+        overlay += self._tracked_overlay()
+        if overlay:
+            cv_image = draw_box_label(cv_image, overlay)
 
         ok, encoded = cv2.imencode(
             '.jpg', cv_image, [int(cv2.IMWRITE_JPEG_QUALITY), 85]
@@ -282,6 +309,21 @@ class BondingBoxMerger(Node):
         self.QBox.setdefault(str(seq), {})[key] = box
         self.pub_status = "1"
         self._cap_qbox_size()
+
+        # [ACTIVITY PATCH] simpan juga untuk overlay live (/cv/frame/image)
+        if name in self.latest_extra:
+            slot = self.latest_extra[name]
+            if seq >= slot["seq"]:
+                if seq > slot["seq"]:
+                    slot["seq"] = seq
+                    slot["boxes"] = []
+                live_box = BondingBox()
+                live_box.label = msg.label or name
+                live_box.confident_level = msg.confident_level
+                live_box.name = name
+                live_box.bondingbox = copy.deepcopy(msg.bondingbox)
+                slot["boxes"].append(live_box)
+                slot["time"] = time.monotonic()
 
         if name in FACE_ANNOTATIONS:
             tid = int(msg.bondingbox_id.data)
@@ -374,6 +416,90 @@ class BondingBoxMerger(Node):
             overlays.append(box)
 
         return overlays
+
+    # [PERSON PATCH] callback + overlay untuk kotak person
+    def person_callback(self, msg: BondingBoxCv):
+        """Simpan kotak person terbaru (satu pesan per kotak, dikelompokkan per frame)."""
+        seq = int(msg.frame_sequence.data)
+        if seq < self.latest_person_seq:
+            return
+        if seq > self.latest_person_seq:
+            self.latest_person_seq = seq
+            self.latest_persons = []
+
+        box = BondingBox()
+        box.name = "person"
+        box.label = msg.label or "Person"
+        box.confident_level = msg.confident_level
+        box.bondingbox = copy.deepcopy(msg.bondingbox)
+        self.latest_persons.append(box)
+        self.latest_person_time = time.monotonic()
+
+    def _person_overlay(self):
+        """Ambil kotak person terbaru, buang duplikat (tumpang tindih / bersarang)."""
+        if time.monotonic() - self.latest_person_time > self.person_ttl:
+            return []
+        boxes = sorted(self.latest_persons,
+                       key=lambda b: b.confident_level, reverse=True)
+        kept = []
+        for b in boxes:
+            if all(not self._is_duplicate(b, k) for k in kept):
+                kept.append(b)
+        return kept
+
+    @staticmethod
+    def _is_duplicate(a, b, iou_thr=0.5, contain_thr=0.8):
+        def rect(o):
+            bb = o.bondingbox
+            return (bb.center.position.x - bb.size_x / 2,
+                    bb.center.position.y - bb.size_y / 2,
+                    bb.center.position.x + bb.size_x / 2,
+                    bb.center.position.y + bb.size_y / 2)
+        ax1, ay1, ax2, ay2 = rect(a)
+        bx1, by1, bx2, by2 = rect(b)
+        iw = max(0.0, min(ax2, bx2) - max(ax1, bx1))
+        ih = max(0.0, min(ay2, by2) - max(ay1, by1))
+        inter = iw * ih
+        area_a = (ax2 - ax1) * (ay2 - ay1)
+        area_b = (bx2 - bx1) * (by2 - by1)
+        union = area_a + area_b - inter
+        if union <= 0:
+            return False
+        iou = inter / union
+        smaller = min(area_a, area_b)
+        contain = inter / smaller if smaller > 0 else 0.0
+        # duplikat jika tumpang tindih besar ATAU satu kotak hampir seluruhnya di dalam yang lain
+        return iou >= iou_thr or contain >= contain_thr
+
+    def _merged_person_extra(self):
+        """Gabungkan activity/gesture ke kotak person kalau posisinya sama.
+
+        Kotak activity/gesture yang menumpuk person tidak digambar sendiri;
+        namanya ditambahkan ke label person. Yang tidak menumpuk person
+        tetap digambar, tetapi duplikat antar-extra dibuang.
+        """
+        persons = [copy.deepcopy(p) for p in self._person_overlay()]
+        extras = sorted(self._extra_overlay(),
+                        key=lambda b: b.confident_level, reverse=True)
+        standalone = []
+        for ex in extras:
+            host = next((p for p in persons if self._is_duplicate(ex, p)), None)
+            if host is not None:
+                tag = f"{ex.name}: {ex.label}"
+                if tag not in host.label:
+                    host.label = f"{host.label} | {tag}"
+            elif all(not self._is_duplicate(ex, s) for s in standalone):
+                standalone.append(ex)
+        return persons + standalone
+
+    def _extra_overlay(self):
+        """Kotak activity & gesture terbaru untuk video live."""
+        now = time.monotonic()
+        boxes = []
+        for slot in self.latest_extra.values():
+            if now - slot["time"] <= self.extra_ttl:
+                boxes.extend(slot["boxes"])
+        return boxes
 
     def recognition_callback(self, msg: BondingBoxCv):
         self._store_ai_result(msg, "recognition")
