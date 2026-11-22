@@ -11,21 +11,53 @@ import json
 import cv2
 import numpy as np
 import os
-import time  # <-- untuk pengukuran presisi (monotonic, bukan wall-clock)
-import csv   # <-- untuk simpan hasil pengukuran ke file, dianalisis nanti
+import time
+import csv
 
 from cv_bridge import CvBridge
 from ultralytics import YOLO
 from ament_index_python.packages import get_package_share_directory
 
 
+# Konfigurasi ByteTrack khusus (ditulis otomatis ke ~/.ros/smartclass saat node start).
+# - conf detektor dibuat rendah supaya asosiasi tahap-2 ByteTrack (deteksi skor rendah)
+#   bisa menyambung track yang sedang ada, sehingga box tidak putus-putus.
+# - new_track_thresh lebih tinggi supaya deteksi lemah tidak membuat ID baru.
+# - track_buffer lebih besar supaya ID bertahan saat objek tertutup sebentar.
+TRACKER_YAML = """tracker_type: bytetrack
+track_high_thresh: 0.4
+track_low_thresh: 0.1
+new_track_thresh: 0.45
+track_buffer: 45
+match_thresh: 0.8
+fuse_score: True
+"""
+
+
 class DetectionNodeInstrumented(Node):
     def __init__(self):
-        super().__init__('DetectionNodeInstrumented')
+        # Nama node disamakan dengan yang berjalan di sistem (/DetectionNode)
+        super().__init__('DetectionNode')
         self.bridge = CvBridge()
 
+        # === PARAMETER (bisa diubah lewat --ros-args -p nama:=nilai) ===
+        self.declare_parameter('model_path', '')     # kosong -> models/best.onnx
+        self.declare_parameter('imgsz', 320)
+        self.declare_parameter('conf', 0.25)
+        self.declare_parameter('iou', 0.5)
+        self.declare_parameter('alpha', 0.4)         # smoothing dasar saat objek diam (1.0 = tanpa smoothing)
+        self.declare_parameter('fast_move_ratio', 0.15)  # pergeseran pusat (relatif ukuran box) yang dianggap gerakan cepat
+        self.declare_parameter('timing_log_path', '~/ros2_ws/detection_timing_log.csv')
+
+        self.imgsz = int(self.get_parameter('imgsz').value)
+        self.conf_thresh = float(self.get_parameter('conf').value)
+        self.iou_thresh = float(self.get_parameter('iou').value)
+        self.alpha = float(self.get_parameter('alpha').value)
+        self.fast_move_ratio = max(1e-3, float(self.get_parameter('fast_move_ratio').value))
+
+        # Depth 1: selalu proses frame terbaru, frame basi dibuang (tidak menumpuk)
         self.sub = self.create_subscription(
-            FrameCv, '/cv/frame', self.callback, 10
+            FrameCv, '/cv/frame', self.callback, 1
         )
 
         self.pub_counting = self.create_publisher(String, '/cv/counting', 10)
@@ -33,14 +65,27 @@ class DetectionNodeInstrumented(Node):
         self.pub_person = self.create_publisher(BondingBoxCv, '/cv/bondingbox/person', 10)
         self.pub_nonperson = self.create_publisher(BondingBoxCv, '/cv/bondingbox/nonperson', 10)
 
-        pkg_path = get_package_share_directory('smartclass_cv')
-        model_path = os.path.join(pkg_path, 'models', 'best.onnx')
+        model_path = self.get_parameter('model_path').value
+        if not model_path:
+            pkg_path = get_package_share_directory('smartclass_cv')
+            model_path = os.path.join(pkg_path, 'models', 'best.onnx')
         self.get_logger().info(f"Loading model from: {model_path}")
         self.model = YOLO(model_path, task='detect')
-        self.get_logger().info("Detection Node (INSTRUMENTED) Started")
 
-        # === SETUP LOGGING TIMING ===
-        self.csv_path = os.path.expanduser('~/smartclass_ws/detection_timing_log.csv')
+        self.tracker_cfg = self._ensure_tracker_cfg()
+        self.get_logger().info(f"Tracker config: {self.tracker_cfg}")
+        self.get_logger().info(
+            f"Detection Node started (imgsz={self.imgsz}, conf={self.conf_thresh}, "
+            f"iou={self.iou_thresh}, alpha={self.alpha})"
+        )
+
+        # === SMOOTHING PER TRACK_ID ===
+        self.prev_ttl_frames = 30   # hapus state track yang sudah lama tidak terlihat
+        self.prev = {}              # (label, track_id) -> {"box": (x1,y1,x2,y2), "last_seen": n}
+
+        # === LOGGING TIMING ===
+        self.csv_path = os.path.expanduser(self.get_parameter('timing_log_path').value)
+        os.makedirs(os.path.dirname(self.csv_path) or '.', exist_ok=True)
         self.csv_file = open(self.csv_path, 'w', newline='')
         self.csv_writer = csv.writer(self.csv_file)
         self.csv_writer.writerow([
@@ -49,15 +94,54 @@ class DetectionNodeInstrumented(Node):
             't_publish_ms', 't_total_ms'
         ])
 
-        # Rolling counter, biar kita juga bisa lihat rata-rata tiap N frame di terminal
         self.frame_counter = 0
-        self.last_recv_time = None  # buat ukur interval ANTAR frame yang masuk callback
+        self.last_recv_time = None
+
+    @staticmethod
+    def _ensure_tracker_cfg():
+        cfg_dir = os.path.expanduser('~/.ros/smartclass')
+        os.makedirs(cfg_dir, exist_ok=True)
+        path = os.path.join(cfg_dir, 'bytetrack_custom.yaml')
+        with open(path, 'w') as f:
+            f.write(TRACKER_YAML)
+        return path
+
+    def _smooth_box(self, label, tid, box):
+        """EMA adaptif per (label, track_id).
+
+        Objek diam  -> alpha dasar (halus, box stabil).
+        Objek cepat -> alpha naik mendekati 1.0 (box langsung ikut, tidak tertinggal).
+        """
+        x1, y1, x2, y2 = box
+        entry = self.prev.get((label, tid))
+        if entry is not None:
+            px1, py1, px2, py2 = entry["box"]
+            # seberapa jauh pusat box bergeser dibanding ukuran box
+            diag = max(((px2 - px1) ** 2 + (py2 - py1) ** 2) ** 0.5, 1.0)
+            dx = ((x1 + x2) - (px1 + px2)) / 2.0
+            dy = ((y1 + y2) - (py1 + py2)) / 2.0
+            ratio = ((dx ** 2 + dy ** 2) ** 0.5) / diag
+            a = self.alpha + (1.0 - self.alpha) * min(1.0, ratio / self.fast_move_ratio)
+            x1 = a * x1 + (1 - a) * px1
+            y1 = a * y1 + (1 - a) * py1
+            x2 = a * x2 + (1 - a) * px2
+            y2 = a * y2 + (1 - a) * py2
+        self.prev[(label, tid)] = {
+            "box": (x1, y1, x2, y2),
+            "last_seen": self.frame_counter,
+        }
+        return x1, y1, x2, y2
+
+    def _cleanup_prev(self):
+        """Buang state track lama supaya dictionary tidak membesar terus."""
+        limit = self.frame_counter - self.prev_ttl_frames
+        stale = [k for k, v in self.prev.items() if v["last_seen"] < limit]
+        for k in stale:
+            del self.prev[k]
 
     def callback(self, msg: FrameCv):
         t_start = time.perf_counter()
 
-        # --- Ukur interval antar frame yang BENERAN sampai ke callback ini ---
-        # (kalau ini jauh lebih lambat dari interval publish frame_node, artinya ada frame di-drop di queue)
         if self.last_recv_time is not None:
             gap = t_start - self.last_recv_time
         else:
@@ -72,20 +156,50 @@ class DetectionNodeInstrumented(Node):
             frame = self.bridge.imgmsg_to_cv2(msg.frame_image, desired_encoding='bgr8')
             t1 = time.perf_counter()
 
-            # === TAHAP 2: YOLO INFERENCE (dugaan bottleneck utama) ===
-            results = self.model(frame, verbose=False)
+            # === TAHAP 2: YOLO INFERENCE + TRACKING ===
+            results = self.model.track(
+                frame,
+                imgsz=self.imgsz,
+                conf=self.conf_thresh,
+                iou=self.iou_thresh,
+                persist=True,
+                tracker=self.tracker_cfg,
+                verbose=False,
+            )
             t2 = time.perf_counter()
 
-            # === TAHAP 3: POSTPROCESSING (loop bikin bbox, crop image) ===
+            # === TAHAP 3: POSTPROCESSING (smoothing, clamp, hitung) ===
+            H, W = frame.shape[:2]
             detections = []
             for r in results:
-                for box, cls, conf in zip(r.boxes.xyxy, r.boxes.cls, r.boxes.conf):
-                    x1, y1, x2, y2 = map(int, box)
+                if r.boxes is None or r.boxes.id is None:
+                    continue
+                ids = r.boxes.id.int().cpu().tolist()
+                for box, cls, conf, tid in zip(
+                    r.boxes.xyxy, r.boxes.cls, r.boxes.conf, ids
+                ):
                     label = self.model.names[int(cls)]
+                    raw = tuple(float(v) for v in box.cpu().numpy())
+
+                    # smoothing ringan per track_id
+                    x1, y1, x2, y2 = self._smooth_box(label, tid, raw)
+
+                    # clamp supaya crop tidak salah
+                    x1 = max(0, int(x1))
+                    y1 = max(0, int(y1))
+                    x2 = min(W, int(x2))
+                    y2 = min(H, int(y2))
+                    if x2 <= x1 or y2 <= y1:
+                        continue
+
                     detections.append({
-                        "label": label, "confidence": float(conf),
-                        "bbox": [x1, y1, x2, y2]
+                        "label": label,
+                        "confidence": float(conf),
+                        "bbox": [x1, y1, x2, y2],
+                        "track_id": int(tid),
                     })
+
+            self._cleanup_prev()
 
             counts = {}
             for det in detections:
@@ -99,14 +213,15 @@ class DetectionNodeInstrumented(Node):
             # === TAHAP 4: PUBLISH ===
             self.pub_counting.publish(out)
 
-            bondingid = 1
             for box in detections:
                 msg_pub = BondingBoxCv()
                 msg_pub.frame_id = frame_id
                 msg_pub.frame_sampling = msg.frame_sampling
                 msg_pub.frame_sequence.data = msg.frame_sequence.data
-                msg_pub.bondingbox_id.data = bondingid
+                # ID dari tracker (konsisten antar frame), bukan counter urutan
+                msg_pub.bondingbox_id.data = box["track_id"]
                 msg_pub.bondingbox = self.bondingbox2d(*box["bbox"])
+                # crop tetap dikirim: dibutuhkan activity_node
                 croppedimage = frame[box["bbox"][1]:box["bbox"][3], box["bbox"][0]:box["bbox"][2]]
                 msg_pub.cropped_image = self.bridge.cv2_to_imgmsg(croppedimage, encoding="bgr8")
                 msg_pub.timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -120,8 +235,6 @@ class DetectionNodeInstrumented(Node):
                     msg_pub.label = 'Chair'
                     msg_pub.confident_level = box["confidence"]
                     self.pub_nonperson.publish(msg_pub)
-
-                bondingid += 1
 
             t4 = time.perf_counter()
 
@@ -137,10 +250,10 @@ class DetectionNodeInstrumented(Node):
                 round(t_cv2, 2), round(t_infer, 2),
                 round(t_post, 2), round(t_pub, 2), round(t_total, 2)
             ])
-            self.csv_file.flush()  # langsung tulis ke disk, biar gak hilang kalau node di-Ctrl+C
+            self.csv_file.flush()
 
             self.frame_counter += 1
-            if self.frame_counter % 10 == 0:  # print ringkasan tiap 10 frame, biar gak spam terminal
+            if self.frame_counter % 10 == 0:
                 self.get_logger().info(
                     f"[Frame #{self.frame_counter}] gap_antar_frame={gap*1000:.1f}ms | "
                     f"cv2={t_cv2:.1f}ms | inference={t_infer:.1f}ms | "

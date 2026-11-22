@@ -77,6 +77,12 @@ class ActivityNode(Node):
 
         self.last_log_time = time.time()
 
+        # Pembatas frame: activity hanya diproses paling cepat tiap N sequence.
+        # Semua person dalam satu frame tetap diproses bersama.
+        self.declare_parameter('min_seq_gap', 6)
+        self.min_seq_gap = int(self.get_parameter('min_seq_gap').value)
+        self.act_seq = -10**9
+
     # ------------------------------------------------------------------
     # Inferensi: hasilnya selalu list[(cls, conf, x1, y1, x2, y2)]
     # ------------------------------------------------------------------
@@ -103,6 +109,13 @@ class ActivityNode(Node):
         ]
 
     def image_callback(self, msg: BondingBoxCv):
+        # Lewati frame yang terlalu dekat dengan frame activity terakhir
+        seq = int(msg.frame_sequence.data)
+        if seq != self.act_seq:
+            if seq - self.act_seq < self.min_seq_gap:
+                return
+            self.act_seq = seq
+
         frame = self.bridge.imgmsg_to_cv2(msg.cropped_image, desired_encoding='bgr8')
 
         if self.mode == 'local':

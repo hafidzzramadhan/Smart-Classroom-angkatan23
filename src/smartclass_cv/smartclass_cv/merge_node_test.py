@@ -22,6 +22,9 @@ from collections import OrderedDict
 
 FACE_ANNOTATIONS = {'recognition', 'expression'}
 
+# Ketebalan garis bounding box (seragam untuk face, person, activity, gesture)
+BOX_THICKNESS = 2
+
 def maintain_box(box,initial):
         if initial is not None:
             if initial.identity == "":
@@ -50,15 +53,9 @@ def draw_box_label(cv_image,bondingboxs):
             x = int(box.bondingbox.center.position.x - w/2)
             y = int(box.bondingbox.center.position.y - h/2)
 
-            # [PERSON PATCH] pencarian warna aman (tidak KeyError) + garis person lebih tipis
+            # pencarian warna aman (tidak KeyError); ketebalan garis seragam untuk semua kotak
             color = colors.get(box.name, (255, 255, 255))
-            if box.name == "person":
-                thickness = 4
-            elif box.name in ("activity", "gesture"):
-                thickness = 2
-            else:
-                thickness = 10
-            cv2.rectangle(cv_image, (x, y), (x + w, y + h), color, thickness)
+            cv2.rectangle(cv_image, (x, y), (x + w, y + h), color, BOX_THICKNESS)
 
             if box.label == None:
                 box.label = "Unknown"
@@ -177,6 +174,11 @@ class BondingBoxMerger(Node):
         self.CurrentResult = ResultCv()
         self.counting = 1
         self.base64 = String()
+
+        # Publish fusi digabung per 50 ms supaya tidak berulang tiap hasil AI
+        self.pending_fusion = set()
+        self.create_timer(0.05, self._flush_fusion)
+
         self.get_logger().info("Siap memproses")
 
     def pub_to_web(self):
@@ -190,10 +192,9 @@ class BondingBoxMerger(Node):
             for k in oldest_first[:excess]:
                 del self.QBox[k]
 
-    def _cache_frame(self, msg: FrameCv):
+    def _cache_frame(self, msg: FrameCv, cv_image):
         """Cache exact frames as compressed JPEG while slower AI branches finish."""
         seq = int(msg.frame_sequence.data)
-        cv_image = self.bridge.imgmsg_to_cv2(msg.frame_image, desired_encoding='bgr8')
         ok, encoded = cv2.imencode('.jpg', cv_image, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
         if not ok:
             return
@@ -258,14 +259,9 @@ class BondingBoxMerger(Node):
             self.QStream.get()
         latest_stream = self.QStream.get()
         self.lastPublish.data = latest_stream.data
-        print(f'stream latest = {latest_stream.data}')
 
-    def publish_live(self, frames):
+    def publish_live(self, cv_image):
         """Publish live video independently of AI completion."""
-        seq = int(frames.frame_sequence.data)
-        cv_image = self.bridge.imgmsg_to_cv2(
-            frames.frame_image, desired_encoding='bgr8'
-        )
 
         # [PERSON PATCH] person digambar dulu, wajah di atasnya
         overlay = self._merged_person_extra()  # person + activity/gesture digabung
@@ -289,16 +285,17 @@ class BondingBoxMerger(Node):
         self.stream_frame(msg)
 
     def frame_callback(self, msg: FrameCv):
-        # No unbounded frame FIFO.
-        self._cache_frame(msg)
+        # No unbounded frame FIFO. Konversi image hanya sekali per frame.
+        cv_image = self.bridge.imgmsg_to_cv2(msg.frame_image, desired_encoding='bgr8')
         seq = int(msg.frame_sequence.data)
+        # Cache di-encode SEBELUM publish_live menggambar kotak di atas cv_image
+        self._cache_frame(msg, cv_image)
         if str(seq) in self.QBox:
             self._publish_exact_fusion(seq)
-        self.publish_live(msg)
+        self.publish_live(cv_image)
 
     def _store_ai_result(self, msg: BondingBoxCv, name: str):
         seq = int(msg.frame_sequence.data)
-        print(f'box frame {name}- {seq}')
         box = BondingBox()
         box.label = msg.label
         box.confident_level = msg.confident_level
@@ -351,8 +348,14 @@ class BondingBoxMerger(Node):
             self.latest_overlay_seq = seq
             self.latest_overlay = list(self.QBox[str(seq)].values())
             self.latest_overlay_time = time.monotonic()
-        if not self._publish_exact_fusion(seq):
-            print(f'waiting exact frame - {seq}')
+        # Gabungkan publish fusi: dikirim berkala oleh timer, bukan tiap hasil AI
+        self.pending_fusion.add(seq)
+
+    def _flush_fusion(self):
+        pending = sorted(self.pending_fusion)
+        self.pending_fusion.clear()
+        for seq in pending:
+            self._publish_exact_fusion(seq)
 
     def face_detection_callback(self, msg: BondingBoxCv):
         """Simpan koordinat YOLO berdasarkan ByteTrack ID."""
@@ -488,6 +491,9 @@ class BondingBoxMerger(Node):
                 tag = f"{ex.name}: {ex.label}"
                 if tag not in host.label:
                     host.label = f"{host.label} | {tag}"
+            elif ex.name == "activity":
+                # kotak activity yang tidak menempel ke person (cyan) tidak digambar
+                continue
             elif all(not self._is_duplicate(ex, s) for s in standalone):
                 standalone.append(ex)
         return persons + standalone

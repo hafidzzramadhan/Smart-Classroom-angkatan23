@@ -9,6 +9,7 @@ from cv_bridge import CvBridge
 from datetime import datetime
 from ultralytics import YOLO
 import os
+import time
 import cv2
 from ament_index_python.packages import get_package_share_directory
 
@@ -59,7 +60,7 @@ class FaceNode(Node):
                 frame = self.br.imgmsg_to_cv2(msg.frame_image, desired_encoding='bgr8')
                  
                 # 2. YOLO face Inference
-                results = self.model.track(frame, persist=True, tracker="bytetrack.yaml", verbose=False)
+                results = self.model.track(frame, imgsz=320, persist=True, tracker="bytetrack.yaml", verbose=False)
                 for result in results:
                     # Get detections as a pandas DataFrame
                     detections = result.boxes.xyxy  # Bounding boxes in [x1, y1, x2, y2] format
